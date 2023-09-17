@@ -8,7 +8,7 @@ return {
 
 {'j-morano/buffer_manager.nvim', -- buffer manager in a floating window
     opts = { short_file_names = true, short_term_names = true },
-    keys = { {'<leader>bf', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true} }
+    keys = { {'<leader>bf', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true, desc='Toggle buffer manager'} }
 },
 
 {'folke/which-key.nvim', -- preview complex key mapping
@@ -26,7 +26,7 @@ return {
         on_attach = on_attach_nvim_tree,
         view = { number = true }
     },
-    keys = { { '<leader>tf', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true } },
+    keys = { { '<leader>tf', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='Toggle file manager' } },
 },
 
 -- 'nvim-telescope/telescope.nvim', -- Fuzzy finder

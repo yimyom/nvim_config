@@ -1,18 +1,18 @@
 return {
 
 {'simrat39/symbols-outline.nvim',
-    keys = { {'<leader>ts', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true } }
+    keys = { {'<leader>ts', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='List of symbols'} }
 },
 
 'aklt/plantuml-syntax', -- PlantUML syntax
 
 {'folke/trouble.nvim', dependencies = {'nvim-tree/nvim-web-devicons'},
     keys = {
-        {'<leader>xx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true},
-        {'<leader>xw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true},
-        {'<leader>xd', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true},
-        {'<leader>xq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true},
-        {'<leader>xl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true}, },
+        {'<leader>xx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
+        {'<leader>xw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
+        {'<leader>xd', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
+        {'<leader>xq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
+        {'<leader>xl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'}, },
 },
 
 {'nvim-treesitter/nvim-treesitter',
@@ -32,20 +32,13 @@ return {
 {'neovim/nvim-lspconfig',
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = {
-       -- Shortcuts syntax <leader> l<letter> where l is for language and <letter> is the function
-       {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true },
-       -- Show "hover" documentation for a symbol under the cursor (signature, man page, help, etc...)
-       {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true },
-       -- Show the implementation for the symbol under the cursor (if supported by the LSP server)
-       {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true },
-       -- Show the signature of the function or method under the cursor
-       {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true },
-       -- Show the type definition of the symbol under the cursor
-       {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true },
-       -- Rename the symbol under the cursor
-       {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true },
-       -- Format the Code
-       {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true } },
+       {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='Symbol definition'},
+       {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='Symbol hover information'},
+       {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='Symbol implementation'},
+       {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='Symbol signature help'},
+       {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='Symbol type definition'},
+       {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='Rename symbol'},
+       {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true }, desc='Format code'},
     config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             local on_attach = function(client, bufnr)
