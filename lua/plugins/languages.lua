@@ -1,18 +1,18 @@
 return {
 
 {'simrat39/symbols-outline.nvim',
-    keys = { {'<leader>ts', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='List of symbols'} }
+    keys = { {'<leader>lo', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='list of symbols'} }
 },
 
 'aklt/plantuml-syntax', -- PlantUML syntax
 
 {'folke/trouble.nvim', dependencies = {'nvim-tree/nvim-web-devicons'},
     keys = {
-        {'<leader>xx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
-        {'<leader>xw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
-        {'<leader>xd', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
-        {'<leader>xq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
-        {'<leader>xl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'}, },
+        {'<leader>dx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
+        {'<leader>dw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
+        {'<leader>dd', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
+        {'<leader>dq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
+        {'<leader>dl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'}, },
 },
 
 {'nvim-treesitter/nvim-treesitter',
@@ -32,13 +32,16 @@ return {
 {'neovim/nvim-lspconfig',
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = {
-       {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='Symbol definition'},
-       {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='Symbol hover information'},
-       {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='Symbol implementation'},
-       {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='Symbol signature help'},
-       {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='Symbol type definition'},
-       {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='Rename symbol'},
-       {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true }, desc='Format code'},
+        {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='symbol definition'},
+        {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='symbol help information'},
+        {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='symbol implementation'},
+        {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='symbol signature help'},
+        {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='symbol type definition'},
+        {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='rename symbol'},
+        {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true , desc='format code'},
+        {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>',  noremap=true, silent=true, desc='type hierarchy'},
+        {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>', noremap=true, silent=true, desc='symbol information'},
+    },
     config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             local on_attach = function(client, bufnr)
@@ -51,7 +54,11 @@ return {
             })
             require('lspconfig')['clangd'].setup({
                 capabilities = capabilities,
-                on_attach = on_attach,
+                on_attach = function(client, bufnr)
+                    vim.g.completion_matching_strategy_list = "['exact', 'substring', 'fuzzy']"
+                    require('clangd_extensions.inlay_hints').setup_autocmd()
+                    require('clangd_extensions.inlay_hints').set_inlay_hints()
+                end,
             })
             require('lspconfig')['r_language_server'].setup({
                 capabilities = capabilities,
@@ -90,7 +97,7 @@ return {
         cmp.setup({
         snippet = {
             expand = function(args)
-                require 'luasnip'.lsp_expand(args.body)
+                require('luasnip').lsp_expand(args.body)
             end
         },
         window = {
@@ -130,7 +137,32 @@ return {
         end
 },
 
-'p00f/clangd_extensions.nvim', -- Extra clang LSP features
+{'p00f/clangd_extensions.nvim', -- Extra clang LSP features
+    config = function()
+        require('clangd_extensions').setup({
+            inlay_hints = {
+                },
+            symbol_info = {
+                border = {
+                { "╭", "FloatBorder" },
+                { "─", "FloatBorder" },
+                { "╮", "FloatBorder" },
+                { "│", "FloatBorder" },
+                { "╯", "FloatBorder" },
+                { "─", "FloatBorder" },
+                { "╰", "FloatBorder" },
+                { "│", "FloatBorder" }, }
+                },
+        })
+        print('hello')
+        end,
+--    opts = {
+--        inlay_hints = {
+--            show_parameter_hints = false,
+--            right_align = true,
+--            },
+--        },
+},
 'mfussenegger/nvim-dap',
 'rcarriga/nvim-dap-ui',
 'nvim-telescope/telescope-dap.nvim',
