@@ -14,6 +14,7 @@ When the files are deployed as explained above, the first start of neovim will l
 ## plugins
 | Plugins | Description |
 | --------| ------------|
+| test1   |   bla bla bla|
 | --------| ------------|
 | --------| ------------|
 | --------| ------------|
