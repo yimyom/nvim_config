@@ -11,8 +11,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.o.backup = false
 vim.o.mouse = 'a'
 vim.o.number = true -- line numbers on the left
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.o.splitbelow = true -- always horizontaly split a window below the current active window
+vim.o.splitright = true -- always vertically split a window right to the current active window
 vim.o.updatetime = 400
 
 -- Color and theme options
@@ -74,5 +74,5 @@ vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTre
 
 -- Load plugins
 require('lazy').setup('plugins', {
-    defaults = { lazy = false, },
+    defaults = { lazy = true, },
 })

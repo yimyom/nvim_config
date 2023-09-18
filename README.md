@@ -11,6 +11,12 @@ The structure is as follow:
 When the files are deployed as explained above, the first start of neovim will load and install all the plugins. This procedure can take some time depending on your machine and internet speed connection. On my machine, it takes less than a minute anyway.
 
 # Features
+# Vi configuration
+- Install `lazy` package manager automatically
+- Folding is done with Treesitter expressions
+- Tabs are 4 spaces with smart indent
+- When opening a terminal, the terminal becomes active immediately. Same when moving the cursor into an active terminal. Use `esc` to go back to normal mode from a terminal
+
 ## plugins
 | Plugins | Description |
 | --------| ------------|
