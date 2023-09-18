@@ -12,5 +12,11 @@ When the files are deployed as explained above, the first start of neovim will l
 
 # Features
 ## plugins
+| Plugins | Description |
+| --------| ------------|
+| --------| ------------|
+| --------| ------------|
+| --------| ------------|
+
 ## keyboard shortcuts
 # TODO
