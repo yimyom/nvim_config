@@ -162,8 +162,17 @@ return {
 --            },
 --        },
 },
+{'nvimdev/lspsaga.nvim', -- More LSP features
+    event = 'LspAttach',
+--    config = function()
+--        require('lspsaga').setup({})
+--    end,
+    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
+},
+
 'mfussenegger/nvim-dap',
 'rcarriga/nvim-dap-ui',
 'nvim-telescope/telescope-dap.nvim',
 'theHamsta/nvim-dap-virtual-text',
+
 }
