@@ -154,7 +154,6 @@ return {
                 { "│", "FloatBorder" }, }
                 },
         })
-        print('hello')
         end,
 --    opts = {
 --        inlay_hints = {
