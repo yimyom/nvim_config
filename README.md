@@ -15,9 +15,6 @@ When the files are deployed as explained above, the first start of neovim will l
 | Plugins | Description |
 | --------| ------------|
 | test1   |   bla bla bla|
-| --------| ------------|
-| --------| ------------|
-| --------| ------------|
 
 ## keyboard shortcuts
 # TODO
