@@ -9,3 +9,8 @@ The structure is as follow:
 - `lua/plugins`: it holds several files for configure the various plugins
 
 When the files are deployed as explained above, the first start of neovim will load and install all the plugins. This procedure can take some time depending on your machine and internet speed connection. On my machine, it takes less than a minute anyway.
+
+# Features
+## plugins
+## keyboard shortcuts
+# TODO
