@@ -73,6 +73,4 @@ vim.api.nvim_create_autocmd("TermOpen",
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Load plugins
-require('lazy').setup('plugins', {
-    defaults = { lazy = true, },
-})
+require('lazy').setup('plugins', { defaults = { lazy = false, }, })
