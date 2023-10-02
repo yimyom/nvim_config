@@ -8,21 +8,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- General vi config
-vim.o.backup = false
-vim.o.mouse = 'a'
-vim.o.number = true -- line numbers on the left
+vim.o.backup = false    -- don't keep backup files
+vim.o.mouse = 'a'       -- use the mouse
+vim.o.number = true     -- line numbers on the left
 vim.o.splitbelow = true -- always horizontaly split a window below the current active window
 vim.o.splitright = true -- always vertically split a window right to the current active window
-vim.o.updatetime = 400
+vim.o.updatetime = 1000 -- update the swap file once per second 
 
 -- Color and theme options
-vim.o.termguicolors = true
-vim.o.background = 'dark'
-vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
+vim.o.termguicolors = true              -- enable 24-bit RGB color
+vim.o.background = 'dark'               -- prefer a dark theme color   
+--vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1  - 
 
 -- Disable netrw in favor of NVimTree
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Use treesitter to determine the folding
 vim.o.foldlevelstart = 20
@@ -35,7 +35,8 @@ vim.opt.completeopt = {'menuone', 'noselect', 'noinsert', 'preview'}
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
 -- Indentation options
-vim.o.smartindent = true
+--vim.o.smartindent = true
+vim.o.cindent = true
 vim.o.tabstop = 4
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
