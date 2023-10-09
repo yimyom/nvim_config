@@ -39,8 +39,15 @@ return {
 },
 
 -- UI User Interface plugins
-{'lukas-reineke/indent-blankline.nvim', -- indent lines
-    opts = { show_current_context = true,show_current_context_start = true}},
+{'lukas-reineke/indent-blankline.nvim', main='ibl', -- indent lines
+    config = function()
+        require('ibl').setup({
+            -- show_current_context = true,
+            show_current_context_start = true,
+            scope = { enabled = true },
+        })
+        end
+},
 
 {'nvim-lualine/lualine.nvim', opts = {
     options = {
