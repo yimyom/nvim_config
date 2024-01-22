@@ -38,4 +38,39 @@ UI, utilies and misc. plugins
 
 
 ## keyboard shortcuts
+
+`\` is the __<Leader>_ key. I use the default one: `\`.
+
+- **\b**: open the list of buffers
+- **\f**: open the file manager
+
+- **\lo**: open the hierarchy of symbols on the right of the window
+
+- **\tx**: Open the __Trouble__ window
+- **\tw**: Open workspace diagnostics window
+- **\td**: Open document diagnostics window
+- **\tq**: Open QuickFix window
+- **\tl**: Open location list
+
+- **\ld**: 
+- **\ld**:
+- **\ld**:
+- **\ld**:
+- **\ld**:
+- **\ld**:
+- **\ld**:
+- **\ld**:
+- **\ld**:
+
+- **\gp**: Previous git hunk
+- **\gn**: Next git hunk
+- **\gb**: Blame line
+- **\gd**: Diff this with the previous head (HEAD~1)
+- **\gv**: Preview git hunk
+- **\gi**: Preview git hunk inline
+- **\gs**: Stage hunk under the cursor
+- **\gf**: Stage buffer
+- **\gl**: Open the quickfix window with git changes
+
+
 # TODO

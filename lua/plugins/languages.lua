@@ -1,7 +1,7 @@
 return {
 
 {'simrat39/symbols-outline.nvim',
-    keys = { {'<leader>lo', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='list of symbols'} }
+    keys = { {'<leader>lo', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='List of symbols in the sidebar'} }
 },
 
 'aklt/plantuml-syntax', -- PlantUML syntax
@@ -32,15 +32,15 @@ return {
 {'neovim/nvim-lspconfig',
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = {
-        {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='symbol definition'},
-        {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='symbol help information'},
-        {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='symbol implementation'},
-        {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='symbol signature help'},
-        {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='symbol type definition'},
-        {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='rename symbol'},
-        {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true , desc='format code'},
-        {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>',  noremap=true, silent=true, desc='type hierarchy'},
-        {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>', noremap=true, silent=true, desc='symbol information'},
+        {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='Jump to the definition of the symbol under the cursor'},
+        {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='Symbol help information'},
+        {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='Symbol implementation'},
+        {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='Symbol signature help'},
+        {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='Symbol type definition'},
+        {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='Rename symbol'},
+        {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true , desc='Format code'},
+        {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>',  noremap=true, silent=true, desc='Type hierarchy'},
+        {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>', noremap=true, silent=true, desc='Symbol information'},
     },
     config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -162,17 +162,18 @@ return {
 --            },
 --        },
 },
-{'nvimdev/lspsaga.nvim', -- More LSP features
-    event = 'LspAttach',
+
+--{'nvimdev/lspsaga.nvim', -- More LSP features
+--    event = 'LspAttach',
 --    config = function()
 --        require('lspsaga').setup({})
 --    end,
-    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
-},
+--    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
+--},
 
-'mfussenegger/nvim-dap',
-'rcarriga/nvim-dap-ui',
-'nvim-telescope/telescope-dap.nvim',
-'theHamsta/nvim-dap-virtual-text',
+--'mfussenegger/nvim-dap',
+--'rcarriga/nvim-dap-ui',
+--'nvim-telescope/telescope-dap.nvim',
+--'theHamsta/nvim-dap-virtual-text',
 
 }
