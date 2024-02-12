@@ -162,6 +162,34 @@ return {
 --            },
 --        },
 },
+{'mfussenegger/nvim-dap', -- Debugger adapter protocol
+    config = function()
+        local dap = require('dap')
+        dap.adapters.gdb =
+        {
+            type = "executable",
+            command = "gdb",
+            args = { "-i", "dap" }
+        }
+
+        dap.configurations.c =
+        {
+            {
+                name = "Launch",
+                type = "gdb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = "${workspaceFolder}",
+                stopAtBeginningOfMainSubprogram = false,
+            },
+
+        }
+        -- require('dap').setup()
+        end,
+},
+    --
 
 --{'nvimdev/lspsaga.nvim', -- More LSP features
 --    event = 'LspAttach',
@@ -171,7 +199,6 @@ return {
 --    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
 --},
 
---'mfussenegger/nvim-dap',
 --'rcarriga/nvim-dap-ui',
 --'nvim-telescope/telescope-dap.nvim',
 --'theHamsta/nvim-dap-virtual-text',
