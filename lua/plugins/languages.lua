@@ -144,14 +144,14 @@ return {
                 },
             symbol_info = {
                 border = {
-                { "╭", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "╮", "FloatBorder" },
-                { "│", "FloatBorder" },
-                { "╯", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "╰", "FloatBorder" },
-                { "│", "FloatBorder" }, }
+                { '╭', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '╮', 'FloatBorder' },
+                { '│', 'FloatBorder' },
+                { '╯', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '╰', 'FloatBorder' },
+                { '│', 'FloatBorder' }, }
                 },
         })
         end,
