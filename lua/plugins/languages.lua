@@ -69,9 +69,9 @@ return {
                 on_attach = on_attach,
                 settings = {
                     pylsp = { plugins = { pycodestyle = {
-                        ignore = {'E202','E123','E251','E128','E305','E301','E501','E302',
-                            'W391','E401','E261','E221','E265','E225','E226','E201','E222',
-                            'E231','E127','E203','E402','W191'},
+                        ignore = { 'E123', 'E127', 'E128', 'E201', 'E202', 'E203', 'E221', 'E222',
+                                   'E225', 'E226', 'E231', 'E251', 'E261', 'E262', 'E265', 'E301',
+                                   'E302', 'E305', 'E401', 'E402', 'E501', 'W191', 'W391', },
                         maxLineLength = 100
                         }}}}})
             end
@@ -189,6 +189,15 @@ return {
         -- require('dap').setup()
         end,
 },
+
+{
+    'ray-x/lsp_signature.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    config = function(_, opts)
+        require('lsp_signature').setup(opts)
+        end
+}
     --
 
 --{'nvimdev/lspsaga.nvim', -- More LSP features
