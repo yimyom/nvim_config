@@ -1,19 +1,56 @@
+-- Plugins working automatically without invokation from the user
 return {
 
--- Color scheme
-{'rebelot/kanagawa.nvim', priority = 1000,
+{'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
+    lazy = true
+},
+
+{'catppuccin/nvim',
+    priority = 1000,
+    name = 'catppuccin',
+    event = {"BufReadPre","BufNewFile"},
+    opts = {
+        flavour = 'mocha',
+        term_colors = true,
+        no_italic = true,
+        no_bold = true,
+        styles = {
+            comments = {'italic'}
+        },
+    },
+    integrations = {
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = {'italic'},
+                hints = {'italic'},
+                warnings = {'italic'},
+                information = {'italic'},
+            },
+        },
+    },
     config = function()
-        vim.cmd([[colorscheme kanagawa]])
+        vim.cmd.colorscheme('catppuccin')
     end
 },
 
+{'folke/tokyonight.nvim',
+    priority = 1000,
+    opts = {},
+},
+
 -- UI User Interface plugins
-{'lukas-reineke/indent-blankline.nvim', main='ibl', -- indent lines
-    config = function()
-        require('ibl').setup({
-            scope = { enabled = true },
-        })
-        end
+{'lukas-reineke/indent-blankline.nvim', -- indent lines
+    event = {'BufReadPre', 'BufNewFile'},
+    main='ibl',
+    opts = {
+        indent = {
+            char = "▏",
+        },
+        scope = {
+            enabled = true,
+        },
+    }
 },
 
 {'nvim-lualine/lualine.nvim',
@@ -55,5 +92,28 @@ return {
     {
     },
 },
+
+{'gelguy/wilder.nvim',
+    opts = {
+        modes = {':', '/', '?'},
+    },
+},
+
+{'folke/trouble.nvim',
+    dependencies = {'nvim-tree/nvim-web-devicons'},
+    keys = {
+        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>',
+        noremap=true, silent=true, desc='Open Trouble window'},
+        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>',
+        noremap=true, silent=true, desc='Open workspace diagnostics window'},
+        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>',
+        noremap=true, silent=true, desc='Open document diagnostics window'},
+        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>',
+        noremap=true, silent=true, desc='Open QuickFix window'},
+        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>',
+        noremap=true, silent=true, desc='Open location list'},
+    },
+},
+
 
 } -- end of return

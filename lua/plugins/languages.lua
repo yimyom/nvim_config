@@ -1,215 +1,224 @@
 return {
 
-{'simrat39/symbols-outline.nvim',
-    keys = { {'<leader>lo', '<cmd>SymbolsOutline<cr>', mode='n', noremap=true, silent=true, desc='List of symbols in the sidebar'} }
-},
-
-'aklt/plantuml-syntax', -- PlantUML syntax
-
-{'folke/trouble.nvim', dependencies = {'nvim-tree/nvim-web-devicons'},
-    keys = {
-        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
-        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
-        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
-        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
-        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'}, },
+{'aklt/plantuml-syntax', -- PlantUML syntax
+    ft='plantuml',
+    lazy = true,
 },
 
 {'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    config = function()
-        require('nvim-treesitter.configs').setup({
-            ensure_installed = {'arduino','awk','bash','bibtex','c','cmake',
+    build = function()
+        vim.cmd('TSUpdate')
+    end,
+    opts = {
+        ensure_installed = {
+            'arduino','awk','bash','bibtex','c','cmake',
             'cpp','css','csv','diff','dot','git_rebase','gitattributes',
-            'gitcommit','html','javascript','json','latex','lua','make',
-            'markdown','markdown_inline','ninja','python','r','regex','yaml'},
-            auto_install = true,
-            highlight = { enable = true, additional_vim_regex_highlighting = false, },
-            indent = { enable = true }, })
-        end
-},
-
-{'neovim/nvim-lspconfig',
-    event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
-    keys = {
-        {'<leader>ld', vim.lsp.buf.definition, noremap=true, silent=true, desc='Jump to the definition of the symbol under the cursor'},
-        {'<leader>lh', vim.lsp.buf.hover,  mode='n', noremap=true, silent=true, desc='Symbol help information'},
-        {'<leader>li', vim.lsp.buf.implementation,  mode='n', noremap=true, silent=true, desc='Symbol implementation'},
-        {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='Symbol signature help'},
-        {'<leader>lt', vim.lsp.buf.type_definition,  mode='n', noremap=true, silent=true, desc='Symbol type definition'},
-        {'<leader>lr', vim.lsp.buf.rename,  mode='n', noremap=true, silent=true, desc='Rename symbol'},
-        {'<leader>lf', vim.lsp.buf.formatting,  mode='n', noremap=true, silent=true , desc='Format code'},
-        {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>',  noremap=true, silent=true, desc='Type hierarchy'},
-        {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>', noremap=true, silent=true, desc='Symbol information'},
+            'gitcommit','html','javascript','json','latex','lua', 'make',
+            'markdown','markdown_inline','ninja','python','r','regex','yaml'
+        },
+        auto_install = true,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+        },
+        indent = {
+            enable = true,
+        },
     },
     config = function()
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local on_attach = function(client, bufnr)
-                    vim.g.completion_matching_strategy_list = "['exact', 'substring', 'fuzzy']"
-                end
-            require('lspconfig')['bashls'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = { 'zsh', 'bash', 'sh' },
-            })
-            require('lspconfig')['clangd'].setup({
-                capabilities = capabilities,
-                on_attach = function(client, bufnr)
-                    vim.g.completion_matching_strategy_list = "['exact', 'substring', 'fuzzy']"
-                    require('clangd_extensions.inlay_hints').setup_autocmd()
-                    require('clangd_extensions.inlay_hints').set_inlay_hints()
-                end,
-            })
-            require('lspconfig')['r_language_server'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-            require('lspconfig')['pylsp'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    pylsp = { plugins = { pycodestyle = {
-                        ignore = { 'E123', 'E127', 'E128', 'E201', 'E202', 'E203', 'E221', 'E222',
-                                   'E225', 'E226', 'E231', 'E251', 'E261', 'E262', 'E265', 'E301',
-                                   'E302', 'E305', 'E401', 'E402', 'E501', 'W191', 'W391', },
-                        maxLineLength = 100
-                        }}}}})
-            end
+        require('nvim-treesitter.configs').setup({})
+    end,
+},
+
+{'williamboman/mason.nvim',    -- Package manager to install LSP servers, linters, formatters and debuggers
+    lazy = true,
+    cmd = 'Mason',
+    dependencies = {'williamboman/mason-lspconfig.nvim', -- Bridge between the previous and the next package :-)
+    opts = {
+        automatic_installation = true,
+    },
+    },
+    config = function()
+        require('mason').setup()
+    end,
+},
+
+{'neovim/nvim-lspconfig',   -- Configure and start language servers when appropriate
+    event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
+    keys = {
+        {'<leader>ld', vim.lsp.buf.definition,
+            noremap=true, silent=true, desc='Jump to the definition of the symbol under the cursor'},
+        {'<leader>lh', vim.lsp.buf.hover,
+            mode='n', noremap=true, silent=true, desc='Symbol help information'},
+        {'<leader>li', vim.lsp.buf.implementation,
+            mode='n', noremap=true, silent=true, desc='Symbol implementation'},
+        {'<leader>ls', vim.lsp.buf.signature_help,
+            mode='n', noremap=true, silent=true, desc='Symbol signature help'},
+        {'<leader>lt', vim.lsp.buf.type_definition,
+            mode='n', noremap=true, silent=true, desc='Symbol type definition'},
+        {'<leader>lr', vim.lsp.buf.rename,
+            mode='n', noremap=true, silent=true, desc='Rename symbol'},
+        {'<leader>lf', vim.lsp.buf.formatting,
+            mode='n', noremap=true, silent=true , desc='Format code'},
+        {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>',
+            noremap=true, silent=true, desc='C++ type hierarchy (from clangd)'},
+        {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>',
+            noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
+    },
+    opts = {
+        servers = {
+            neocmake = {},
+            jsonls = {},
+            texlab = {},
+            lua_ls = {},
+            r_language_server = {},
+            bashls = {
+                filetypes = {'zsh','bash','sh'},
+            },
+            clangd = {
+                cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'},
+            },
+            pyright = {},
+--          pylsp = {
+--              plugins = {
+--                  pycodestyle = {
+--                      ignore = { 'E123', 'E127', 'E128', 'E201', 'E202', 'E203', 'E221', 'E222',
+--                                  'E225', 'E226', 'E231', 'E251', 'E261', 'E262', 'E265', 'E301',
+--                                  'E302', 'E305', 'E401', 'E402', 'E501', 'W191', 'W391',
+--                      },
+--                      maxLineLength = 100
+--                  }
+--              }
+--          },
+        },
+    },
+    config = function(_, opts)
+        local lspconfig = require('lspconfig')
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+        local on_attach = function(client, bufnr)
+            vim.g.completion_matching_strategy_list = "['exact','substring','fuzzy']"
+        end
+
+        -- Configure each server individually
+        for server,server_config in pairs(opts.servers) do
+            server_config['capabilities'] = capabilities
+            lspconfig[server].setup(server_config)
+        end
+    end,
+},
+
+{'onsails/lspkind.nvim',
+    lazy = true,
 },
 
 {'hrsh7th/nvim-cmp',
+    lazy = true,
+    event='InsertEnter',
     dependencies = {
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
-        'hrsh7th/cmp-nvim-lua',
-        'hrsh7th/cmp-buffer',
---        'jalvesaq/cmp-nvim-r',
-        {'saadparwaiz1/cmp_luasnip',
-            dependencies = {
-                {'L3MON4D3/LuaSnip',
-                    version = '2.*',
-                    build = 'make install_jsregexp',
-                },},
-        },},
-    config = function()
+        {'hrsh7th/cmp-nvim-lsp'},
+        {'hrsh7th/cmp-nvim-lsp-signature-help'},
+        {'ray-x/cmp-treesitter'},
+        {'hrsh7th/cmp-buffer'},
+        {'hrsh7th/cmp-path'},
+        {'bydlw98/cmp-env'},
+        {'amarakon/nvim-cmp-lua-latex-symbols',
+            opts = { cache = true }
+        },
+        { 'hrsh7th/cmp-nvim-lua'},
+
+--        {'R-nvim/cmp-r',}
+----        'jalvesaq/cmp-nvim-r',
+    },
+    -- We cannot use opts directly because this plugin needs to refer to
+    -- itself during configuration 
+    config = function() 
         local cmp = require('cmp')
+        local cmp_buffer = require('cmp_buffer')
+        local lspkind = require('lspkind')
+
         cmp.setup({
-        snippet = {
-            expand = function(args)
-                require('luasnip').lsp_expand(args.body)
-            end
-        },
-        window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
-        },
-        mapping = {
-           ['<Tab>'] = cmp.mapping.select_next_item(),
-           ['<S-Tab>']=cmp.mapping.select_prev_item(),
-           ['<C-Space>'] = cmp.mapping.complete(),
-           ['<CR>'] = cmp.mapping.confirm({
-               behavior = cmp.ConfirmBehavior.Insert,
-               select = true, })
-        },
-        sources = {
-            { name = 'path' },
-            { name = 'nvim_lsp' },
-            { name = 'nvim_lsp_signature_help' },
-            { name = 'nvim_lua' },
-            { name = 'buffer' },
-            { name = 'luasnip' },
-            { name = 'cmp_nvim_r' }
-        },
-        formatting = {
-            fields = {'menu', 'abbr', 'kind'},
-            format = function(entry, item)
-            local menu_icon ={
-                nvim_lsp = 'λ',
-                vsnip = '⋗',
-                buffer = 'b',
-                path = 'p'
-            }
-            item.menu = menu_icon[entry.source.name]
-            return item
-            end,
-        } })
-        end
+            sources = {
+                { name = 'nvim_lsp' },
+                { name = 'nvim_lsp_signature_help'},
+                { name = 'treesitter' },
+                { name = 'buffer',
+                    option = {
+                        -- fct to index only in visible buffers if their size does not
+                        -- exceed 2 Mb
+                        get_bufnrs = function()
+                            local bufs = {}
+                            for _, win in ipairs(vim.api.nvim_list_wins()) do
+                                local buf = vim.api.nvim_win_get_buf(win)
+                                local bytes = vim.api.nvim_buf_get_offset(buf,
+                                    vim.api.nvim_buf_line_count(buf))
+                                if bytes > 2*1024*1024 then-- 2 megabytes max
+                                    bufs[buf] = true
+                                end
+                            end
+                            return vim.tbl_keys(bufs)
+                        end
+                    },
+                },
+                { name = 'path' },
+                { name = 'env',
+                    option = {
+                        eval_on_confirm = false,
+                        show_documentation_window = true,
+                        },
+                },
+                { name = 'lua-latex-symbol',
+                    options = { cache = true },
+                },
+                { name = 'nvim_lua' },
+            },
+            completion = {
+                completeopt = 'menu,menuone,noinsert',
+            },
+            window = {
+                completion = {
+                    border = 'rounded',
+                },
+                documentation = {
+                    border = 'rounded',
+                },
+            },
+            sorting = {
+                comparators = {
+                    function(...)
+                        return cmp_buffer:compare_locality(...)
+                    end,
+                }
+            },
+            mapping = {
+                ['<Tab>'] = cmp.mapping.select_next_item(),
+                ['<S-Tab>']=require('cmp').mapping.select_prev_item(),
+                ['<C-Space>'] = require('cmp').mapping.complete(),
+                ['<CR>'] = require('cmp').mapping.confirm({
+                    behavior = require('cmp').ConfirmBehavior.Insert,
+                    select = true,
+                })
+            },
+            formatting = {
+                format = lspkind.cmp_format({
+                    maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+                    ellipsis_char = '...',
+                    show_labelDetails = true,
+                }),
+            },
+        })
+    end,
 },
 
 {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
-    config = function()
-        require('clangd_extensions').setup({
-            inlay_hints = {
-                },
-            symbol_info = {
-                border = {
-                { '╭', 'FloatBorder' },
-                { '─', 'FloatBorder' },
-                { '╮', 'FloatBorder' },
-                { '│', 'FloatBorder' },
-                { '╯', 'FloatBorder' },
-                { '─', 'FloatBorder' },
-                { '╰', 'FloatBorder' },
-                { '│', 'FloatBorder' }, }
-                },
-        })
-        end,
---    opts = {
---        inlay_hints = {
---            show_parameter_hints = false,
---            right_align = true,
---            },
---        },
+    lazy = true,
+    opts = {
+        inlay_hints = {
+            parameter_hints_prefix = '← ',
+            other_hints_prefix = '⇒ ',
+            show_parameter_hints = false,
+        },
+    },
 },
-{'mfussenegger/nvim-dap', -- Debugger adapter protocol
-    config = function()
-        local dap = require('dap')
-        dap.adapters.gdb =
-        {
-            type = "executable",
-            command = "gdb",
-            args = { "-i", "dap" }
-        }
-
-        dap.configurations.c =
-        {
-            {
-                name = "Launch",
-                type = "gdb",
-                request = "launch",
-                program = function()
-                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end,
-                cwd = "${workspaceFolder}",
-                stopAtBeginningOfMainSubprogram = false,
-            },
-
-        }
-        -- require('dap').setup()
-        end,
-},
-
-{
-    'ray-x/lsp_signature.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    config = function(_, opts)
-        require('lsp_signature').setup(opts)
-        end
-}
-    --
-
---{'nvimdev/lspsaga.nvim', -- More LSP features
---    event = 'LspAttach',
---    config = function()
---        require('lspsaga').setup({})
---    end,
---    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
---},
-
---'rcarriga/nvim-dap-ui',
---'nvim-telescope/telescope-dap.nvim',
---'theHamsta/nvim-dap-virtual-text',
 
 }
