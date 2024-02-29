@@ -6,6 +6,7 @@ return {
 },
 
 {'nvim-treesitter/nvim-treesitter',
+    event = {'BufReadPost', 'BufNewFile'},
     build = function()
         vim.cmd('TSUpdate')
     end,
@@ -14,19 +15,19 @@ return {
             'arduino','awk','bash','bibtex','c','cmake',
             'cpp','css','csv','diff','dot','git_rebase','gitattributes',
             'gitcommit','html','javascript','json','latex','lua', 'make',
-            'markdown','markdown_inline','ninja','python','r','regex','yaml'
+            'markdown','markdown_inline','ninja','python','r','regex','yaml',
         },
         auto_install = true,
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = false,
+            -- additional_vim_regex_highlighting = false,
         },
         indent = {
             enable = true,
         },
     },
-    config = function()
-        require('nvim-treesitter.configs').setup({})
+    config = function(_, opts)
+        require('nvim-treesitter.configs').setup(opts)
     end,
 },
 
