@@ -1,76 +1,62 @@
 # nvim_config
 
-A simple neovim config.
-Clone this repository and put the files in `~/.config/nvim` (Linux) or the equivalent location on your operating system.
+An efficient neovim config for programmers and academics.
 
-The directory structure is as follows:
+# Installation
+
+I usually clone the project and create a symbolic link from `${HOME}/.config/nvim` to the `nvim_config` directory.
+Doing so, every time `nvim_config` is updated with `git pull`, there is no need to re-install it.
+
+When the files are deployed as explained above, the first start of neovim will load and install all the plugins.
+This procedure can take some time depending on your machine and internet speed connection. On my machine, it takes
+less than a minute anyway.
+
+Then you will notice that `Treesitter` installs all the required languages grammars and Mason will install the required
+language servers. If you need to check the language servers or install more, call `:Mason` in neovim.
+
+# Directory structure
 
 - `init.lua`: set the basic parameters, load `lazy.vim` the plugins manager
-- `lua/plugins`: it holds several files for configure the various plugins
-- `lua/plugins/languages.lua`: config and plugins for programming languages (LSP, Treesitter, etc...)
-- `lua/plugins/ui_utils_misc.lua`: all the other plugins used in this configuration
+- `lua/` contains config files and the `plugins` directory.
+- `lua/plugins`: config files for all the neovim plugins
 
-When the files are deployed as explained above, the first start of neovim will load and install all the plugins. This procedure can take some time depending on your machine and internet speed connection. On my machine, it takes less than a minute anyway.
 
-# Features
 # Vi configuration
 - Install `lazy` package manager automatically
-- Folding is done with Treesitter expressions
+- Folding is done using Treesitter expressions
 - Tabs are 4 spaces with smart indent
-- When opening a terminal, the terminal becomes active immediately. Same when moving the cursor into an active terminal. Use `esc` to go back to normal mode from a terminal
+- When opening a terminal, the terminal becomes active immediately. Same when moving the cursor into an active terminal.
+  Use `esc` to go back to normal mode from a terminal
 
-## plugins
+## Keyboard shortcuts
 
-UI, utilies and misc. plugins
------------------------------
+`\` is the __<Leader>__ key.
 
-| Plugins | Description |
-| --------| ------------|
-| plenary   | Functions used by other plugins. Required by many |
-| nvim-unception | `vi` inside a vi-terminal will open in the parent vi, not in the terminal |
-| which-key | Display key mappings when the first keys are pressed |
-| Nvim Tree | File manager |
-| Telescope | Fuzzy finder to search for just everything in real-time |
-| Kanagawa  | A color scheme |
-| Indent blankline | draw vertical lines to show indentations |
-| lualine | a nice and advanced status line |
-| gitsigns | put a left-column showing git modifications (+ other git features) |
-
-
-## keyboard shortcuts
-
-`\` is the __<Leader>_ key. I use the default one: `\`.
-
-- **\b**: open the list of buffers
-- **\f**: open the file manager
-
-- **\lo**: open the hierarchy of symbols on the right of the window
-
-- **\tx**: Open the __Trouble__ window
-- **\tw**: Open workspace diagnostics window
-- **\td**: Open document diagnostics window
-- **\tq**: Open QuickFix window
-- **\tl**: Open location list
-
-- **\ld**: 
-- **\ld**:
-- **\ld**:
-- **\ld**:
-- **\ld**:
-- **\ld**:
-- **\ld**:
-- **\ld**:
-- **\ld**:
-
-- **\gp**: Previous git hunk
-- **\gn**: Next git hunk
-- **\gb**: Blame line
-- **\gd**: Diff this with the previous head (HEAD~1)
-- **\gv**: Preview git hunk
-- **\gi**: Preview git hunk inline
-- **\gs**: Stage hunk under the cursor
-- **\gf**: Stage buffer
-- **\gl**: Open the quickfix window with git changes
-
-
-# TODO
+- Utils:
+  - **\b** ➜ Buffer manager
+  - **\f** ➜ File manager
+- Git:
+  - **\gb** ➜ Blame line
+  - **\gn** ➜ Next git hunk 
+  - **\gd** ➜ Diff this with the previous head (HEAD~1)
+  - **\gp** ➜ Previous git hunk
+  - **\gf** ➜ Stage buffer
+  - **\gs** ➜ Stage hunk under the cursor
+  - **\gi** ➜ Preview git hunk inline
+  - **\gv** ➜ Preview git hunk
+  - **\gl** ➜ Open the quickfix window with git changes
+- Languages and LSP
+  - **\ld** ➜ Jump to the definition of the symbol under the cursor
+  - **\ln** ➜ C++ symbol information (from clangd)
+  - **\le** ➜ C++ type hierarchy (from clangd)
+  - **\lr** ➜ Rename symbol
+  - **\lh** ➜ Symbol help information
+  - **\ls** ➜ Symbol signature help
+  - **\li** ➜ Symbol implementation
+  - **\lt** ➜ Symbol type definition
+- Troubles and diagnostics:
+  - **\td** ➜ Open document diagnostics window
+  - **\tx** ➜ Open Trouble window
+  - **\tl** ➜ Open location list
+  - **\tq** ➜ Open QuickFix window
+  - **\tw** ➜ Open workspace diagnostics window
