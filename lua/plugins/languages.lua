@@ -44,12 +44,14 @@ return {
     lazy = true,
     cmd = 'Mason',
     dependencies = {'williamboman/mason-lspconfig.nvim', -- Bridge between the previous and the next package :-)
-    opts = {
-        automatic_installation = true,
-    },
+        opts = {
+            -- automatic_installation = true,
+            ensure_installed = {'clangd','r_language_server','bashls','neocmake',
+                                'jsonls','texlab','lua_ls','pyright'},
+        },
     },
     config = function()
-        require('mason').setup()
+        require('mason').setup({})
     end,
 },
 
@@ -77,16 +79,29 @@ return {
     },
     opts = {
         servers = {
-            neocmake = {},
-            jsonls = {},
-            texlab = {},
-            lua_ls = {},
+            clangd = {
+                cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'},
+            },
             r_language_server = {},
             bashls = {
                 filetypes = {'zsh','bash','sh'},
             },
-            clangd = {
-                cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'},
+            neocmake = {},
+            jsonls = {},
+            texlab = {},
+            lua_ls = {
+                settings = {
+                    Lua = {
+                        runtime = {
+                            version = 'LuaJIT',
+                        },
+                        diagnostics = {
+                            globals = {'vim'},
+                        },
+                        workspace = {
+                            library = vim.api.nvim_get_runtime_file('', true),
+                            checkThirdParty = false,
+                        },
             },
             pyright = {},
 --          pylsp = {
@@ -126,16 +141,17 @@ return {
     lazy = true,
     event='InsertEnter',
     dependencies = {
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-nvim-lsp-signature-help'},
-        {'ray-x/cmp-treesitter'},
-        {'hrsh7th/cmp-buffer'},
-        {'hrsh7th/cmp-path'},
-        {'bydlw98/cmp-env'},
+        {'hrsh7th/cmp-nvim-lsp', lazy= true, },
+        {'hrsh7th/cmp-nvim-lsp-signature-help', lazy= true, },
+        {'ray-x/cmp-treesitter', lazy= true, },
+        {'hrsh7th/cmp-buffer', lazy= true, },
+        {'hrsh7th/cmp-path', lazy= true, },
+        {'bydlw98/cmp-env', lazy= true, },
         {'amarakon/nvim-cmp-lua-latex-symbols',
-            opts = { cache = true }
+            opts = { cache = true },
+            lazy = true,
         },
-        { 'hrsh7th/cmp-nvim-lua'},
+        { 'hrsh7th/cmp-nvim-lua', lazy= true, },
 
 --        {'R-nvim/cmp-r',}
 ----        'jalvesaq/cmp-nvim-r',
@@ -183,7 +199,7 @@ return {
                 { name = 'nvim_lua' },
             },
             completion = {
-                completeopt = 'menu,menuone,noinsert',
+                completeopt = 'menu,menuone,noselect,popup,noinsert',
             },
             window = {
                 completion = {
@@ -227,6 +243,18 @@ return {
             parameter_hints_prefix = '← ',
             other_hints_prefix = '⇒ ',
             show_parameter_hints = false,
+        },
+    },
+},
+
+{'nvimdev/lspsaga.nvim',
+    event = 'LspAttach',
+    opts = {
+        ui = {
+            border = 'rounded',
+        },
+        outline = {
+            layout = 'float',
         },
     },
 },
