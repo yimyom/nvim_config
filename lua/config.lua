@@ -30,14 +30,10 @@ vim.o.foldmethod='expr'
 vim.o.foldexpr='nvim_treesitter#foldexpr()'
 vim.o.foldtext= [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 
--- Auto-completion
---vim.opt.completeopt = {'menuone', 'noselect', 'noinsert', 'preview'}
---vim.opt.shortmess = vim.opt.shortmess + { c = true }
-
 -- Indentation options
---vim.o.smartindent = true
 vim.o.cindent = true
---vim.o.cinoptions='>s,e0,n0,f0,{1s,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,E0,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,k0,m0,j0,J0,)20,*70,#0,P0'
+vim.o.cinoptions='>s,e0,n0,f0,{1s,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,E0,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,k0,m0,j0,J0,)20,*70,#0,P0'
+
 vim.o.tabstop = 4
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
