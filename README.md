@@ -60,3 +60,17 @@ language servers. If you need to check the language servers or install more, cal
   - **\tl** ➜ Open location list
   - **\tq** ➜ Open QuickFix window
   - **\tw** ➜ Open workspace diagnostics window
+  
+  # About the plugins
+
+## User interface
+- nvim-web-devicons: to display nice icons everywhere, like the top bar, status bar,
+  file manager, etc...
+- catpuccin, tokyonight: nice colorschemes
+- indent-blankline: add vertical indent lines to your programs to help understaning
+  the structure of your code
+- lualine: the status bar is enhanced
+- barbar: a top bar with the open tabs: you can click, move them, close them, reorder
+  them
+- wilder: a nicer pop-up menu when in command mode
+- trouble: open the quick fix window with all the problems in your code
