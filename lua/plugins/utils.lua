@@ -59,6 +59,7 @@ return {
         on_attach = on_attach_nvim_tree,
         view = { number = true }
     },
+    dependencies = {'nvim-tree/nvim-web-devicons',},
     keys = {
         { '<leader>f', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
     },
