@@ -13,7 +13,6 @@ return {
 
 -- General
 {'nvim-lua/plenary.nvim', -- generic functions
-    lazy = true,
 },
 
 -- Utils

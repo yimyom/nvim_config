@@ -11,7 +11,6 @@
 return {
 
 {'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
-    lazy = true
 },
 
 {'catppuccin/nvim',

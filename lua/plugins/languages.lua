@@ -11,7 +11,6 @@ return {
 
 {'aklt/plantuml-syntax', -- PlantUML syntax
     ft='plantuml',
-    lazy = true,
 },
 
 {'nvim-treesitter/nvim-treesitter',
@@ -41,14 +40,16 @@ return {
 },
 
 {'williamboman/mason.nvim',    -- Package manager to install LSP servers, linters, formatters and debuggers
-    lazy = true,
+    lazy = false,
     cmd = 'Mason',
     dependencies = {'williamboman/mason-lspconfig.nvim', -- Bridge between the previous and the next package :-)
+        lazy = false,
         opts = {
-            -- automatic_installation = true,
-            ensure_installed = {'clangd','r_language_server','bashls','neocmake',
-                                'jsonls','texlab','sumneko_lua','pyright'},
+            automatic_installation = true,
         },
+        config = function(_,opts)
+            require('mason-lspconfig').setup(opts)
+        end,
     },
     config = function()
         require('mason').setup({})
@@ -92,9 +93,6 @@ return {
             lua_ls = {
                 settings = {
                     Lua = {
-                        runtime = {
-                            version = 'LuaJIT',
-                        },
                         diagnostics = {
                             globals = {'vim'},
                         },
@@ -136,24 +134,21 @@ return {
 },
 
 {'onsails/lspkind.nvim',
-    lazy = true,
 },
 
 {'hrsh7th/nvim-cmp',
-    lazy = true,
     event='InsertEnter',
     dependencies = {
-        {'hrsh7th/cmp-nvim-lsp', lazy= true, },
-        {'hrsh7th/cmp-nvim-lsp-signature-help', lazy= true, },
-        {'ray-x/cmp-treesitter', lazy= true, },
-        {'hrsh7th/cmp-buffer', lazy= true, },
-        {'hrsh7th/cmp-path', lazy= true, },
-        {'bydlw98/cmp-env', lazy= true, },
+        {'hrsh7th/cmp-nvim-lsp', },
+        {'hrsh7th/cmp-nvim-lsp-signature-help', },
+        {'ray-x/cmp-treesitter', },
+        {'hrsh7th/cmp-buffer', },
+        {'hrsh7th/cmp-path', },
+        {'bydlw98/cmp-env', },
         {'amarakon/nvim-cmp-lua-latex-symbols',
             opts = { cache = true },
-            lazy = true,
         },
-        { 'hrsh7th/cmp-nvim-lua', lazy= true, },
+        { 'hrsh7th/cmp-nvim-lua', },
 
 --        {'R-nvim/cmp-r',}
 ----        'jalvesaq/cmp-nvim-r',
@@ -239,7 +234,6 @@ return {
 },
 
 {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
-    lazy = true,
     opts = {
         inlay_hints = {
             parameter_hints_prefix = '← ',
