@@ -93,15 +93,26 @@ return {
 },
 
 {'romgrk/barbar.nvim',
+    lazy = false,
     dependencies =
     {
         'lewis6991/gitsigns.nvim',
         'nvim-tree/nvim-web-devicons',
     },
-    init = function() vim.g.barbar_auto_setup = false end,
+    keys = {
+        {'<leader>bl', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>',
+                mode = 'n', noremap=true, silent=true, desc='Buffer manager'},
+        {'<leader>bc', '<cmd>BufferClose<cr>', mode = 'n', noremap=true, silent=true, desc='Close buffer'},
+    },
     opts =
     {
+        auto_hide = 2,
+        tabpages = true,
+        clickable = true,
+        hide = { inactive = true, },
+        highlight_visible = true,
     },
+    init = function() vim.g.barbar_auto_setup = false end,
 },
 
 {'gelguy/wilder.nvim',
@@ -110,21 +121,38 @@ return {
     },
 },
 
-{'folke/trouble.nvim',
-    dependencies = {'nvim-tree/nvim-web-devicons'},
+{'j-morano/buffer_manager.nvim', -- buffer manager in a floating window
     keys = {
-        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>',
-        noremap=true, silent=true, desc='Open Trouble window'},
-        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>',
-        noremap=true, silent=true, desc='Open workspace diagnostics window'},
-        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>',
-        noremap=true, silent=true, desc='Open document diagnostics window'},
-        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>',
-        noremap=true, silent=true, desc='Open QuickFix window'},
-        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>',
-        noremap=true, silent=true, desc='Open location list'},
+        {'<leader>bl', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true, desc='Buffer manager'}
+    },
+    opts = {
+        short_file_names = true,
+        short_term_names = true
     },
 },
 
+{'folke/which-key.nvim', -- preview complex key mapping
+    event = 'VeryLazy',
+    opts = {
+        window = {
+            border = 'rounded',
+        },
+    },
+    init = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+    end,
+    config = function(_,opts)
+        local wk = require('which-key')
+        wk.setup(opts)
+        local keymaps = {
+                ['<leader>b'] = { name = 'Buffers' },
+                ['<leader>l'] = { name = 'LSP and languages' },
+                ['<leader>g'] = { name = 'Git' },
+                ['<leader>t'] = { name = 'Trouble and diagnostics' },
+            }
+        wk.register(keymaps)
+    end,
+},
 
 } -- end of return

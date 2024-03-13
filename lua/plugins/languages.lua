@@ -47,7 +47,7 @@ return {
         opts = {
             -- automatic_installation = true,
             ensure_installed = {'clangd','r_language_server','bashls','neocmake',
-                                'jsonls','texlab','lua_ls','pyright'},
+                                'jsonls','texlab','sumneko_lua','pyright'},
         },
     },
     config = function()

@@ -20,37 +20,20 @@ return {
 {'samjwill/nvim-unception', -- open a file in vi from a nested term (no nested vi)
 },
 
-{'j-morano/buffer_manager.nvim', -- buffer manager in a floating window
+{'folke/trouble.nvim',
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     keys = {
-        {'<leader>b', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true, desc='Buffer manager'}
+        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>',
+        noremap=true, silent=true, desc='Open Trouble window'},
+        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>',
+        noremap=true, silent=true, desc='Open workspace diagnostics window'},
+        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>',
+        noremap=true, silent=true, desc='Open document diagnostics window'},
+        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>',
+        noremap=true, silent=true, desc='Open QuickFix window'},
+        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>',
+        noremap=true, silent=true, desc='Open location list'},
     },
-    opts = {
-        short_file_names = true,
-        short_term_names = true
-    },
-},
-
-{'folke/which-key.nvim', -- preview complex key mapping
-    event = 'VeryLazy',
-    opts = {
-        window = {
-            border = 'rounded',
-        },
-    },
-    init = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-    end,
-    config = function(_,opts)
-        local wk = require('which-key')
-        wk.setup(opts)
-        local keymaps = {
-                ['<leader>l'] = { name = '+LSP and languages' },
-                ['<leader>g'] = { name = '+Git' },
-                ['<leader>t'] = { name = '+Trouble and diagnostics' },
-            }
-        wk.register(keymaps)
-    end,
 },
 
 {'nvim-tree/nvim-tree.lua', -- file manager
