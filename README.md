@@ -30,7 +30,7 @@ language servers. If you need to check the language servers or install more, cal
 
 ## Keyboard shortcuts
 
-`\` is the _<Leader>_ key.
+`\` is the _&lt;leader&gt;_ key.
 
 |  Category                |  Keys        |  Description                                          |
 |:-------------------------|:------------:|:------------------------------------------------------|
