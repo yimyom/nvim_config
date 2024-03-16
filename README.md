@@ -30,38 +30,41 @@ language servers. If you need to check the language servers or install more, cal
 
 ## Keyboard shortcuts
 
-`\` is the __<Leader>__ key.
+`\` is the _<Leader>_ key.
 
-- Utils:
-  - **\b** ➜ Buffer manager
-  - **\f** ➜ File manager
-- Git:
-  - **\gb** ➜ Blame line
-  - **\gn** ➜ Next git hunk 
-  - **\gd** ➜ Diff this with the previous head (HEAD~1)
-  - **\gp** ➜ Previous git hunk
-  - **\gf** ➜ Stage buffer
-  - **\gs** ➜ Stage hunk under the cursor
-  - **\gi** ➜ Preview git hunk inline
-  - **\gv** ➜ Preview git hunk
-  - **\gl** ➜ Open the quickfix window with git changes
-- Languages and LSP
-  - **\ld** ➜ Jump to the definition of the symbol under the cursor
-  - **\ln** ➜ C++ symbol information (from clangd)
-  - **\le** ➜ C++ type hierarchy (from clangd)
-  - **\lr** ➜ Rename symbol
-  - **\lh** ➜ Symbol help information
-  - **\ls** ➜ Symbol signature help
-  - **\li** ➜ Symbol implementation
-  - **\lt** ➜ Symbol type definition
-- Troubles and diagnostics:
-  - **\td** ➜ Open document diagnostics window
-  - **\tx** ➜ Open Trouble window
-  - **\tl** ➜ Open location list
-  - **\tq** ➜ Open QuickFix window
-  - **\tw** ➜ Open workspace diagnostics window
+|  Category                |  Keys        |  Description                                          |
+|:-------------------------|:------------:|:------------------------------------------------------|
+| Utils                    |              |                                                       |
+|                          |   **\f**     | File manager                                          |
+|                          |   **\bl**    | Buffer manager                                        |
+|                          |   **\bc**    | Close buffer                                          |
+| Git                      |              |                                                       |
+|                          |   **\gb**    | Blame line                                            |
+|                          |   **\gn**    | Next git hunk                                         |
+|                          |   **\gd**    | Diff this with the previous head (HEAD~1)             |
+|                          |   **\gp**    | Previous git hunk                                     |
+|                          |   **\gf**    | Stage buffer                                          |
+|                          |   **\gs**    | Stage hunk under the cursor                           |
+|                          |   **\gi**    | Preview git hunk inline                               |
+|                          |   **\gv**    | Preview git hunk                                      |
+|                          |   **\gl**    | Open the quickfix window with git changes             |
+| Languages and LSP        |              |                                                       |
+|                          |   **\ld**    | Jump to the definition of the symbol under the cursor |
+|                          |   **\ln**    | C++ symbol information (from clangd)                  |
+|                          |   **\le**    | C++ type hierarchy (from clangd)                      |
+|                          |   **\lr**    | Rename symbol                                         |
+|                          |   **\lh**    | Symbol help information                               |
+|                          |   **\ls**    | Symbol signature help                                 |
+|                          |   **\li**    | Symbol implementation                                 |
+|                          |   **\lt**    | Symbol type definition                                |
+| Troubles and diagnostics |              |                                                       |
+|                          |   **\td**    | Open document diagnostics window                      | 
+|                          |   **\tx**    | Open Trouble window                                   |
+|                          |   **\tl**    | Open location list                                    |
+|                          |   **\tq**    | Open QuickFix window                                  |
+|                          |   **\tw**    | Open workspace diagnostics window                     |
   
-  # About the plugins
+# About the plugins
 
 ## User interface
 - nvim-web-devicons: to display nice icons everywhere, like the top bar, status bar,
