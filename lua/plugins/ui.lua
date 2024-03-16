@@ -11,6 +11,7 @@
 return {
 
 {'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
+    lazy = false,
 },
 
 {'catppuccin/nvim',
@@ -45,7 +46,6 @@ return {
 
 {'folke/tokyonight.nvim',
     priority = 1000,
-    opts = {},
 },
 
 -- UI User Interface plugins
@@ -53,12 +53,8 @@ return {
     event = {'BufReadPre', 'BufNewFile'},
     main='ibl',
     opts = {
-        indent = {
-            char = "▏",
-        },
-        scope = {
-            enabled = true,
-        },
+        indent = { char = "▏", },
+        scope = { enabled = true, },
     }
 },
 
@@ -93,11 +89,6 @@ return {
 
 {'romgrk/barbar.nvim',
     lazy = false,
-    dependencies =
-    {
-        'lewis6991/gitsigns.nvim',
-        'nvim-tree/nvim-web-devicons',
-    },
     keys = {
         {'<leader>bl', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>',
                 mode = 'n', noremap=true, silent=true, desc='Buffer manager'},
@@ -115,9 +106,26 @@ return {
 },
 
 {'gelguy/wilder.nvim',
-    opts = {
-        modes = {':', '/', '?'},
-    },
+    event = 'BufEnter',
+    config = function()
+        local wilder = require('wilder')
+        wilder.setup({modes = {':', '/', '?'}})
+
+        local renderer = wilder.popupmenu_renderer(
+            wilder.popupmenu_border_theme(
+            {
+                highlights =
+                {
+                    border = 'Normal',
+                },
+                border = 'rounded',
+                pumblend=10,
+                left = {' ', wilder.popupmenu_devicons()},
+                right= {' ', wilder.popupmenu_scrollbar()},
+            }))
+
+        wilder.set_option('renderer', renderer)
+        end,
 },
 
 {'j-morano/buffer_manager.nvim', -- buffer manager in a floating window

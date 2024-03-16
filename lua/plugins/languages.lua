@@ -134,6 +134,7 @@ return {
 },
 
 {'onsails/lspkind.nvim',
+    event='LspAttach',
 },
 
 {'hrsh7th/nvim-cmp',
@@ -141,15 +142,21 @@ return {
     dependencies = {
         {'hrsh7th/cmp-nvim-lsp', },
         {'hrsh7th/cmp-nvim-lsp-signature-help', },
-        {'ray-x/cmp-treesitter', },
+--        {'ray-x/cmp-treesitter', },
         {'hrsh7th/cmp-buffer', },
         {'hrsh7th/cmp-path', },
-        {'bydlw98/cmp-env', },
-        {'amarakon/nvim-cmp-lua-latex-symbols',
-            opts = { cache = true },
-        },
-        { 'hrsh7th/cmp-nvim-lua', },
+--        {'bydlw98/cmp-env', },
 
+        -- Lua completion
+--        {'saadparwaiz1/cmp_luasnip'},
+--        { 'hrsh7th/cmp-nvim-lua', },
+        -- LaTeX completion
+--        {'amarakon/nvim-cmp-lua-latex-symbols',
+--            opts = { cache = true },
+--        },
+        -- Snippets
+--        {'L3MON4D3/LuaSnip'},
+        -- R completion
 --        {'R-nvim/cmp-r',}
 ----        'jalvesaq/cmp-nvim-r',
     },
@@ -164,7 +171,7 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'nvim_lsp_signature_help'},
-                { name = 'treesitter' },
+--                { name = 'treesitter' },
                 { name = 'buffer',
                     option = {
                         -- fct to index only in visible buffers if their size does not
@@ -184,16 +191,16 @@ return {
                     },
                 },
                 { name = 'path' },
-                { name = 'env',
-                    option = {
-                        eval_on_confirm = false,
-                        show_documentation_window = true,
-                        },
-                },
-                { name = 'lua-latex-symbol',
-                    options = { cache = true },
-                },
-                { name = 'nvim_lua' },
+--                { name = 'env',
+--                    option = {
+--                        eval_on_confirm = false,
+--                        show_documentation_window = true,
+--                        },
+--                },
+--                { name = 'lua-latex-symbol',
+--                    options = { cache = true },
+--                },
+--                { name = 'nvim_lua' },
             },
             completion = {
                 completeopt = 'menu,menuone,noselect,popup,noinsert',
@@ -233,26 +240,30 @@ return {
     end,
 },
 
-{'p00f/clangd_extensions.nvim', -- Extra clang LSP features
-    opts = {
-        inlay_hints = {
-            parameter_hints_prefix = '← ',
-            other_hints_prefix = '⇒ ',
-            show_parameter_hints = false,
-        },
-    },
-},
+-- {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
+--    lazy = false,
+--    ft = {'c', 'cpp', 'objc', 'objcpp'},
+--    opts = {
+--        inlay_hints = {
+--            parameter_hints_prefix = '← ',
+--            other_hints_prefix = '⇒ ',
+--        },
+--    config = function(_,opts)
+--        require('clangd_extensions').setup(opts)
+--    end,
+--    },
+-- },
 
-{'nvimdev/lspsaga.nvim',
-    event = 'LspAttach',
-    opts = {
-        ui = {
-            border = 'rounded',
-        },
-        outline = {
-            layout = 'float',
-        },
-    },
-},
+-- {'nvimdev/lspsaga.nvim',
+--     event = 'LspAttach',
+--     opts = {
+--         ui = {
+--             border = 'rounded',
+--         },
+--         outline = {
+--             layout = 'float',
+--         },
+--     },
+-- },
 
 }

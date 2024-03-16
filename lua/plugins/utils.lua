@@ -13,14 +13,15 @@ return {
 
 -- General
 {'nvim-lua/plenary.nvim', -- generic functions
+    lazy = false,
 },
 
 -- Utils
 {'samjwill/nvim-unception', -- open a file in vi from a nested term (no nested vi)
+    lazy = false,
 },
 
 {'folke/trouble.nvim',
-    dependencies = {'nvim-tree/nvim-web-devicons'},
     keys = {
         {'<leader>tx', '<cmd>lua require("trouble").open()<cr>',
         noremap=true, silent=true, desc='Open Trouble window'},
@@ -41,14 +42,13 @@ return {
         on_attach = on_attach_nvim_tree,
         view = { number = true }
     },
-    dependencies = {'nvim-tree/nvim-web-devicons',},
     keys = {
         { '<leader>f', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
     },
 },
 
 {'lewis6991/gitsigns.nvim', -- Git signs in the vi gutter (+ on status line)
-    event = "VeryLazy",
+    event = {'BufReadPre','BufNewFile'},
     opts = {
          signs = {
             add = { text = " " }, 
