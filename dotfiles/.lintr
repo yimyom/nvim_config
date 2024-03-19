@@ -1,0 +1,14 @@
+linters: all_linters(
+   commented_code_linter = NULL,
+   quotes_linter = quotes_linter("'"),
+   T_and_F_symbol_linter = NULL,
+   brace_linter = NULL,
+   indentation_linter = NULL,
+   spaces_left_parentheses_linter = NULL,
+   line_length_linter = line_length_linter(length = 120L),
+   assignment_linter = NULL,
+   object_name_linter = object_name_linter(styles=c('symbols','CamelCase','snake_case','SNAKE_CASE','dotted.case','lowercase','UPPERCASE')),
+   extraction_operator_linter = NULL,
+   implicit_integer_linter = NULL
+  )
+

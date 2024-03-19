@@ -77,3 +77,22 @@ language servers. If you need to check the language servers or install more, cal
   them
 - wilder: a nicer pop-up menu when in command mode
 - trouble: open the quick fix window with all the problems in your code
+
+# Utilities
+
+# Languages support
+## LSP
+## Extra configuration's files
+### R Language
+In the `dotfiles` directory, there is a file called `.lintr` which need to be placed
+in your home directory. It contains extra configuration for the R linter to avoid having too many messages on the screen. Depending on your preferences you might want to change this file.
+
+I recommend linking the file directly from the git repository so that next time I update it, you can simply do `git pull` to get the latest version and everything will be update for you.
+
+Let's assume the git repository is in `${HOME}/nvim_config`:
+
+```bash
+ln -s ${HOME}/nvim_config/dotfiles/.lintr ${HOME}
+```
+
+Next, to have a more advanced configuration, refer to the [`lintr` documentation](https://cran.r-project.org/web/packages/lintr/vignettes/lintr.html).

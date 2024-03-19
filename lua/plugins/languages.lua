@@ -83,7 +83,7 @@ return {
             clangd = {
                 cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'},
             },
-            r_language_server = {},
+            r_language_server = { },
             bashls = {
                 filetypes = {'zsh','bash','sh'},
             },
