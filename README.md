@@ -77,7 +77,7 @@ Of course, you might want to put the git repository somewhere else. In that case
 # About the plugins
 
 ## User interface
-- *nvim-web-devicons*: to display nice icons everywhere, like the top bar, status bar,
+- **nvim-web-devicons**: to display nice icons everywhere, like the top bar, status bar,
   file manager, etc...
 - catpuccin, tokyonight: nice colorschemes
 - indent-blankline: add vertical indent lines to your programs to help understaning
