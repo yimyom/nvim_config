@@ -14,6 +14,16 @@ less than a minute anyway.
 Then you will notice that `Treesitter` installs all the required languages grammars and Mason will install the required
 language servers. If you need to check the language servers or install more, call `:Mason` in neovim.
 
+## Simple installation procedure
+```bash
+cd
+git clone https://github.com/yimyom/nvim_config
+mkdir -p ~/.config/
+ln -s ~/nvim_config .nvim
+```
+
+Of course, you might want to put the git repository somewhere else. In that case, you need to adapt the paths in the litle script above.
+
 # Directory structure
 
 - `init.lua`: set the basic parameters, load `lazy.vim` the plugins manager
@@ -76,6 +86,8 @@ language servers. If you need to check the language servers or install more, cal
 - barbar: a top bar with the open tabs: you can click, move them, close them, reorder
   them
 - wilder: a nicer pop-up menu when in command mode
+ - when you press <TAB> a pop-up menu will appear with possible choices when you're on the command line (`:`).
+ - when in search mode (`/` or `?`), the status bar will contain the possible completions instead of having a pop-up menu which overlaps the main text window
 - trouble: open the quick fix window with all the problems in your code
 
 # Utilities
