@@ -77,18 +77,15 @@ Of course, you might want to put the git repository somewhere else. In that case
 # About the plugins
 
 ## User interface
-- **nvim-web-devicons**: to display nice icons everywhere, like the top bar, status bar,
-  file manager, etc...
-- catpuccin, tokyonight: nice colorschemes
-- indent-blankline: add vertical indent lines to your programs to help understaning
-  the structure of your code
-- lualine: the status bar is enhanced
-- barbar: a top bar with the open tabs: you can click, move them, close them, reorder
-  them
-- wilder: a nicer pop-up menu when in command mode
- - when you press <TAB> a pop-up menu will appear with possible choices when you're on the command line (`:`).
- - when in search mode (`/` or `?`), the status bar will contain the possible completions instead of having a pop-up menu which overlaps the main text window
-- trouble: open the quick fix window with all the problems in your code
+- **nvim-web-devicons**: to display nice icons everywhere, like the top bar, status bar, file manager, etc...
+- **catpuccin, tokyonight**: nice colorschemes
+- **indent-blankline**: add vertical indent lines to your programs to help understaning the structure of your code
+- **lualine**: the status bar is enhanced
+- **barbar**: a top bar with the open tabs: you can click, move them, close them, reorder them
+- **wilder**: a nicer pop-up menu when in command mode
+  - when you press <TAB> a pop-up menu will appear with possible choices when you're on the command line (`:`).
+  - when in search mode (`/` or `?`), the status bar will contain the possible completions instead of having a pop-up menu which overlaps the main text window
+- **trouble**: open the quick fix window with all the problems in your code
 
 # Utilities
 
