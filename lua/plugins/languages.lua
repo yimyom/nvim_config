@@ -162,7 +162,7 @@ return {
     },
     -- We cannot use opts directly because this plugin needs to refer to
     -- itself during configuration 
-    config = function() 
+    config = function()
         local cmp = require('cmp')
         local cmp_buffer = require('cmp_buffer')
         local lspkind = require('lspkind')

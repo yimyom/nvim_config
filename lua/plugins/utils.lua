@@ -79,4 +79,10 @@ return {
         {'<leader>gl', '<cmd>Gitsigns setqflist<cr>', mode='n', noremap=true, silent=true, desc='Open the quickfix window with git changes'},
     },
 },
+
+{
+    'ragnarok22/whereami.nvim',
+    cmd = "Whereami"
+},
+
 } -- end of return
