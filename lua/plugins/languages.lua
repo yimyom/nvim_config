@@ -20,10 +20,12 @@ return {
     end,
     opts = {
         ensure_installed = {
-            'arduino','awk','bash','bibtex','c','cmake',
-            'cpp','css','csv','diff','dot','git_rebase','gitattributes',
-            'gitcommit','html','javascript','json','latex','lua', 'make',
-            'markdown','markdown_inline','ninja','python','r','regex','yaml',
+            'arduino','awk','bash','bibtex','c','cmake', 'commonlisp',
+            'cpp','css','csv','diff','dot', 'doxygen', 'fortran',
+            'git_config', 'git_rebase','gitattributes','gitcommit', 'gitignore',
+            'haskell', 'html', 'ini', 'javascript','json','latex','lua', 'make',
+            'markdown','markdown_inline','ninja','passwd','python','r','regex','sql',
+            'ssh_config', 'strace', 'tmux', 'todotxt', 'vim', 'vimdoc', 'xml', 'yaml',
         },
         auto_install = true,
         highlight = {
