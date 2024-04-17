@@ -67,6 +67,7 @@ Of course, you might want to put the git repository somewhere else. In that case
 |                          |   **\ls**    | Symbol signature help                                 |
 |                          |   **\li**    | Symbol implementation                                 |
 |                          |   **\lt**    | Symbol type definition                                |
+|                          |   **\lo**    | Display symbol outline                                |
 | Troubles and diagnostics |              |                                                       |
 |                          |   **\td**    | Open document diagnostics window                      | 
 |                          |   **\tx**    | Open Trouble window                                   |
