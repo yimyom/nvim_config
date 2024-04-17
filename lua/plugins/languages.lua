@@ -242,6 +242,20 @@ return {
     end,
 },
 
+{
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys =
+    {
+        { "<leader>lo", "<cmd>Outline<CR>", desc = "Display symbols outline" },
+    },
+    opts = { },
+    config = function(_, opts)
+        require('outline').setup(opts)
+    end,
+},
+
 -- {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
 --    lazy = false,
 --    ft = {'c', 'cpp', 'objc', 'objcpp'},

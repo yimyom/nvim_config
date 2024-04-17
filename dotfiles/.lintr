@@ -9,6 +9,8 @@ linters: all_linters(
    assignment_linter = NULL,
    object_name_linter = object_name_linter(styles=c('symbols','CamelCase','snake_case','SNAKE_CASE','dotted.case','lowercase','UPPERCASE')),
    extraction_operator_linter = NULL,
-   implicit_integer_linter = NULL
+   implicit_integer_linter = NULL,
+   undesirable_function_linter = undesirable_function_linter(fun=default_undesirable_functions[-which(
+        names(default_undesirable_functions)%in% c('library'))]
   )
 
