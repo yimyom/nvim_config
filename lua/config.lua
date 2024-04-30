@@ -14,6 +14,7 @@ vim.o.number = true     -- line numbers on the left
 vim.o.splitbelow = true -- always horizontaly split a window below the current active window
 vim.o.splitright = true -- always vertically split a window right to the current active window
 vim.o.updatetime = 1000 -- update the swap file once per second 
+vim.o.signcolumn = true  -- keep the left gutter on at all time
 
 -- Color and theme options
 vim.o.termguicolors = true              -- enable 24-bit RGB color
