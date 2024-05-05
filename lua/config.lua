@@ -21,10 +21,6 @@ vim.o.termguicolors = true              -- enable 24-bit RGB color
 vim.o.background = 'dark'               -- prefer a dark theme color   
 --vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1  - 
 
--- Disable netrw in favor of NVimTree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Use treesitter to determine the folding
 vim.o.foldlevelstart = 20
 vim.o.foldmethod='expr'

@@ -7,6 +7,10 @@
 -- more details. You should have received a copy of the GNU General Public License along with
 -- nvim_config. If not, see <https://www.gnu.org/licenses/>.
 
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Boostrap and load Lazy.nvim to manage the plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
