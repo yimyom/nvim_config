@@ -23,16 +23,11 @@ return {
 
 {'folke/trouble.nvim',
     keys = {
-        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>',
-        noremap=true, silent=true, desc='Open Trouble window'},
-        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>',
-        noremap=true, silent=true, desc='Open workspace diagnostics window'},
-        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>',
-        noremap=true, silent=true, desc='Open document diagnostics window'},
-        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>',
-        noremap=true, silent=true, desc='Open QuickFix window'},
-        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>',
-        noremap=true, silent=true, desc='Open location list'},
+        {'<leader>tx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
+        {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
+        {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
+        {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
+        {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'},
     },
 },
 
@@ -58,13 +53,6 @@ return {
             changedelete = { text= "~" },
             untracked = { text = "┆" },
         },
-        --signs = {
-        --    add         ={hl='GitSignsAdd'   ,text='+',numhl='GitSignsAddNr'   ,linehl='GitSignsAddLn'},
-        --    change      ={hl='GitSignsChange',text='~',numhl='GitSignsChangeNr',linehl='GitSignsChangeLn'},
-        --    delete      ={hl='GitSignsDelete',text='-',numhl='GitSignsDeleteNr',linehl='GitSignsDeleteLn'},
-        --    topdelete   ={hl='GitSignsDelete',text='‾',numhl='GitSignsDeleteNr',linehl='GitSignsDeleteLn'},
-        --    changedelete={hl='GitSignsChange',text='~',numhl='GitSignsChangeNr',linehl='GitSignsChangeLn'},
-        --},
         preview_config = { border = 'rounded', },
     },
     keys = {
@@ -77,6 +65,14 @@ return {
 		{'<leader>gs', '<cmd>Gitsigns stage_hunk<cr>', mode='n', noremap=true, silent=true, desc='Stage hunk under the cursor'},
 		{'<leader>gf', '<cmd>gitsigns stage_buffer<cr>', mode='n', noremap=true, silent=true, desc='Stage buffer'},
         {'<leader>gl', '<cmd>Gitsigns setqflist<cr>', mode='n', noremap=true, silent=true, desc='Open the quickfix window with git changes'},
+    },
+},
+
+{'niuiic/git-log.nvim',
+    event = {'BufReadPre','BufNewFile'},
+    dependencies = {'niuiic/core.nvim'},
+    keys = {
+        {'<leader>go', '<cmd>lua require("git-log").check_log()<cr>', noremap=true, silent=true, desc='Display the git log for the selected text'},
     },
 },
 
