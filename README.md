@@ -78,6 +78,13 @@ Of course, you might want to put the git repository somewhere else. In that case
 # About the plugins
 
 ## User interface
+### Color schemes
+- [catpuccin](https://github.com/catppuccin/nvim) is the default
+- [tokyonight](https://github.com/folke/tokyonight.nvim)
+- [sonokai](https://github.com/sainnhe/sonokai)
+To change the default colorscheme, go to the file `lua/plugins/ui.lua`, search for lines containing `vim.cmd.colorscheme` and uncomment the one you want to use by default. Make sure all the other lines containing the same string and commented out.
+
+### User interface plugins
 - **nvim-web-devicons**: to display nice icons everywhere, like the top bar, status bar, file manager, etc...
 - **catpuccin, tokyonight**: nice colorschemes
 - **indent-blankline**: add vertical indent lines to your programs to help understaning the structure of your code

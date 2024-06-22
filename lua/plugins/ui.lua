@@ -10,8 +10,19 @@
 -- Plugins working automatically without invokation from the user
 return {
 
-{'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
-    lazy = false,
+--{'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
+--    lazy = false,
+--},
+
+{'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies =
+    {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+        -- '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
 },
 
 {'catppuccin/nvim',
@@ -40,13 +51,34 @@ return {
         },
     },
     config = function()
-        vim.cmd.colorscheme('catppuccin')
-    end
+		vim.cmd.colorscheme('catppuccin')
+	end,
 },
 
 {'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
+	config = function()
+		-- vim.cmd.colorscheme('tokyonight')
+	end,
+},
+
+{'sainnhe/sonokai',
+    lazy = false,
+    priority = 1000,
+    config = function()
+        vim.g.sonokai_enable_italic = true
+		-- vim.cmd.colorscheme('sonokai')
+    end
+},
+
+{'neanias/everforest-nvim',
+	version = false,
+	lazy = false,
+	priority = 1000,
+	config = function()
+		-- vim.cmd.colorscheme('everforest')
+	end,
 },
 
 -- UI User Interface plugins
@@ -88,16 +120,12 @@ return {
     }
 },
 
-{'romgrk/barbar.nvim',
-    lazy = false,
-    opts =
-    {
-        tabpages = true,
-        clickable = true,
-        hide = { inactive = true, },
-        highlight_visible = true,
-    },
-    init = function() vim.g.barbar_auto_setup = false end,
+{'nanozuki/tabby.nvim',
+  event = 'VimEnter',
+  dependencies = 'nvim-tree/nvim-web-devicons',
+  config = function()
+    -- configs...
+  end,
 },
 
 {'gelguy/wilder.nvim',
