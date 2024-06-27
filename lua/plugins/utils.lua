@@ -31,14 +31,29 @@ return {
     },
 },
 
-{'nvim-tree/nvim-tree.lua', -- file manager
-    opts = {
-        sort_by = 'case_sensitive',
-        on_attach = on_attach_nvim_tree,
-        view = { number = true }
+--{'nvim-tree/nvim-tree.lua', -- file manager
+--    opts = {
+--        sort_by = 'case_sensitive',
+--        on_attach = on_attach_nvim_tree,
+--        view = { number = true }
+--    },
+--    keys = {
+--        { '<leader>f', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
+--    },
+--},
+
+{'nvim-neo-tree/neo-tree.nvim',
+    lazy = true,
+    cmd = 'Neotree',
+    branch = 'v3.x',
+    dependencies =
+    {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
     },
     keys = {
-        { '<leader>f', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
+        { '<leader>f', '<cmd>Neotree<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
     },
 },
 

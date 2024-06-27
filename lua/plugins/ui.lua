@@ -10,19 +10,8 @@
 -- Plugins working automatically without invokation from the user
 return {
 
---{'nvim-tree/nvim-web-devicons', -- Glyphs and Icons for neovim
---    lazy = false,
---},
-
-{'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies =
-    {
-        'nvim-lua/plenary.nvim',
-        'nvim-tree/nvim-web-devicons',
-        'MunifTanjim/nui.nvim',
-        -- '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
+{'MunifTanjim/nui.nvim',
+    lazy = true
 },
 
 {'catppuccin/nvim',

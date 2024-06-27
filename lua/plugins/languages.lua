@@ -149,13 +149,6 @@ return {
         {'hrsh7th/cmp-path', },
 --        {'bydlw98/cmp-env', },
 
-        -- Lua completion
---        {'saadparwaiz1/cmp_luasnip'},
---        { 'hrsh7th/cmp-nvim-lua', },
-        -- LaTeX completion
---        {'amarakon/nvim-cmp-lua-latex-symbols',
---            opts = { cache = true },
---        },
         -- Snippets
 --        {'L3MON4D3/LuaSnip'},
         -- R completion
