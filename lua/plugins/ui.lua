@@ -182,25 +182,24 @@ return {
 {'folke/which-key.nvim', -- preview complex key mapping
     event = 'VeryLazy',
     opts = {
-        window = {
+        win = {
             border = 'rounded',
         },
+        mappings = {
+            { lhs = '<leader>b', group = 'buffers', desc = 'Buffers' },
+            { lhs = '<leader>l', group = 'lsp_and_languages', desc = 'LSP and languages' },
+            { lhs = '<leader>g', group = 'git', desc = 'Git' },
+            { lhs = '<leader>t', group = 'trouble_and_diagnostics', desc = 'Trouble and diagnostics' },
+        }
     },
     init = function()
         vim.o.timeout = true
         vim.o.timeoutlen = 300
     end,
-    config = function(_,opts)
-        local wk = require('which-key')
-        wk.setup(opts)
-        local keymaps = {
-                ['<leader>b'] = { name = 'Buffers' },
-                ['<leader>l'] = { name = 'LSP and languages' },
-                ['<leader>g'] = { name = 'Git' },
-                ['<leader>t'] = { name = 'Trouble and diagnostics' },
-            }
-        wk.register(keymaps)
-    end,
+},
+
+{'echasnovski/mini.icons',
+    version = false
 },
 
 {'RishabhRD/popfix'
