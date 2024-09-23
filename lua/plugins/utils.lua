@@ -34,16 +34,35 @@ return {
 {'nvim-neo-tree/neo-tree.nvim',
     lazy = true,
     cmd = 'Neotree',
---    branch = 'v3.x',
     dependencies =
     {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
         'MunifTanjim/nui.nvim',
+        {
+            's1n7ax/nvim-window-picker',
+            opts =
+            {
+                filter_rules =
+                {
+                    include_current_win = false,
+                    autoselect_one = true,
+                    -- filter using buffer options
+                    bo =
+                    {
+                        -- if the file type is one of following, the window will be ignored
+                        filetype = {'neo-tree', 'neo-tree-popup', 'notify'},
+                        -- if the buffer type is one of following, the window will be ignored
+                        buftype = {'quickfix'},
+                    },
+                },
+           },
+        },
     },
     opts =
     {
         close_if_last_window = true,
+        use_popups_for_input = false,
         popup_border_style = 'rounded',
         enable_git_status = true,
         enable_diagnostics = true,
@@ -53,13 +72,17 @@ return {
         event_handlers =
         {
             event = "neo_tree_buffer_enter",
-            handler = function()
-                vim.opt_local.number = true
+            handler = function(arg)
+                vim.cmd([[
+                    setlocal number
+                ]])
+--                vim.opt_local.number = true
+--                vim.opt_local.relativenumber = true
             end,
         },
     },
     keys = {
-        { '<leader>f', '<cmd>Neotree toggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
+        { '<leader>f', '<cmd>Neotree toggle<cr>: set number<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
     },
 },
 
