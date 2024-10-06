@@ -14,6 +14,17 @@ return {
     lazy = true
 },
 
+{'echasnovski/mini.icons',
+    version = false
+},
+
+{'RishabhRD/popfix'
+},
+
+-- --------------------------------
+-- Colorscheme
+-- --------------------------------
+
 {'catppuccin/nvim',
     lazy = false,
     priority = 1000,
@@ -70,7 +81,10 @@ return {
 	end,
 },
 
+-- --------------------------------
 -- UI User Interface plugins
+-- --------------------------------
+
 {'lukas-reineke/indent-blankline.nvim', -- indent lines
     event = {'BufReadPre', 'BufNewFile'},
     main='ibl',
@@ -181,28 +195,24 @@ return {
 
 {'folke/which-key.nvim', -- preview complex key mapping
     event = 'VeryLazy',
-    opts = {
-        win = {
+    opts =
+    {
+        win =
+        {
             border = 'rounded',
         },
-        mappings = {
-            { lhs = '<leader>b', group = 'buffers', desc = 'Buffers' },
-            { lhs = '<leader>l', group = 'lsp_and_languages', desc = 'LSP and languages' },
-            { lhs = '<leader>g', group = 'git', desc = 'Git' },
-            { lhs = '<leader>t', group = 'trouble_and_diagnostics', desc = 'Trouble and diagnostics' },
+        spec =
+        {
+            { lhs = '<leader>b', group = 'Buffers', desc = 'Buffers' },
+            { lhs = '<leader>l', group = 'LSP and languages', desc = 'LSP and languages' },
+            { lhs = '<leader>g', group = 'Git', desc = 'Git' },
+            { lhs = '<leader>t', group = 'Trouble and diagnostics', desc = 'Trouble and diagnostics' },
         }
     },
     init = function()
         vim.o.timeout = true
         vim.o.timeoutlen = 300
     end,
-},
-
-{'echasnovski/mini.icons',
-    version = false
-},
-
-{'RishabhRD/popfix'
 },
 
 } -- end of return
