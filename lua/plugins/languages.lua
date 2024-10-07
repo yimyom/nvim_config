@@ -135,9 +135,9 @@ return {
     end,
 },
 
--- {'onsails/lspkind.nvim',
---     event='LspAttach',
--- },
+{'onsails/lspkind.nvim',
+    event='LspAttach',
+},
 
 {'hrsh7th/nvim-cmp',
     event='InsertEnter',
