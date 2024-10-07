@@ -135,9 +135,9 @@ return {
     end,
 },
 
-{'onsails/lspkind.nvim',
-    event='LspAttach',
-},
+-- {'onsails/lspkind.nvim',
+--     event='LspAttach',
+-- },
 
 {'hrsh7th/nvim-cmp',
     event='InsertEnter',
@@ -235,13 +235,12 @@ return {
     end,
 },
 
-{
-    "hedyhli/outline.nvim",
+{'hedyhli/outline.nvim',
     lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
+    cmd = { 'Outline', 'OutlineOpen' },
     keys =
     {
-        { "<leader>lo", "<cmd>Outline<CR>", desc = "Display symbols outline" },
+        { '<leader>lo', '<cmd>Outline<CR>', desc = 'Display symbols outline' },
     },
     opts = { },
     config = function(_, opts)

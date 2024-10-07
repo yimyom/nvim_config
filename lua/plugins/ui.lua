@@ -10,16 +10,16 @@
 -- Plugins working automatically without invokation from the user
 return {
 
-{'MunifTanjim/nui.nvim',
-    lazy = true
-},
+-- {'MunifTanjim/nui.nvim',
+--    lazy = true
+-- },
 
 {'echasnovski/mini.icons',
     version = false
 },
 
-{'RishabhRD/popfix'
-},
+-- {'RishabhRD/popfix'
+-- },
 
 -- --------------------------------
 -- Colorscheme
@@ -123,13 +123,13 @@ return {
     }
 },
 
-{'nanozuki/tabby.nvim',
-  event = 'VimEnter',
-  dependencies = 'nvim-tree/nvim-web-devicons',
-  config = function()
-    -- configs...
-  end,
-},
+-- {'nanozuki/tabby.nvim',
+--   event = 'VimEnter',
+--   dependencies = 'nvim-tree/nvim-web-devicons',
+--   config = function()
+--     -- configs...
+--   end,
+-- },
 
 {'gelguy/wilder.nvim',
     event = 'BufEnter',
