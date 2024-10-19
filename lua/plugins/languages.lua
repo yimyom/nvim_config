@@ -1,3 +1,4 @@
+-- 1+1= 
 -- This file is part of nvim_config.
 -- nvim_config is free software: you can redistribute it and/or modify it under the terms of the
 -- GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -144,16 +145,16 @@ return {
     dependencies = {
         {'hrsh7th/cmp-nvim-lsp', },
         {'hrsh7th/cmp-nvim-lsp-signature-help', },
---        {'ray-x/cmp-treesitter', },
+        {'hrsh7th/cmp-nvim-lsp-document-symbol', },
+        {'hrsh7th/cmp-calc', },
         {'hrsh7th/cmp-buffer', },
         {'hrsh7th/cmp-path', },
+        {'amarakon/nvim-cmp-lua-latex-symbols', },
+        {'hrsh7th/cmp-nvim-lua', },
+--        {'ray-x/cmp-treesitter', },
 --        {'bydlw98/cmp-env', },
-
-        -- Snippets
---        {'L3MON4D3/LuaSnip'},
-        -- R completion
+--        'jalvesaq/cmp-nvim-r',
 --        {'R-nvim/cmp-r',}
-----        'jalvesaq/cmp-nvim-r',
     },
     -- We cannot use opts directly because this plugin needs to refer to
     -- itself during configuration 
@@ -165,8 +166,9 @@ return {
         cmp.setup({
             sources = {
                 { name = 'nvim_lsp' },
-                { name = 'nvim_lsp_signature_help'},
---                { name = 'treesitter' },
+                { name = 'nvim_lsp_signature_help' },
+                { name = 'nvim_lsp_document_symbol' },
+                { name = 'calc' },
                 { name = 'buffer',
                     option = {
                         -- fct to index only in visible buffers if their size does not
@@ -186,16 +188,8 @@ return {
                     },
                 },
                 { name = 'path' },
---                { name = 'env',
---                    option = {
---                        eval_on_confirm = false,
---                        show_documentation_window = true,
---                        },
---                },
---                { name = 'lua-latex-symbol',
---                    options = { cache = true },
---                },
---                { name = 'nvim_lua' },
+                { name = 'nvim_cmp_lua_latex_symbols' },
+                { name = 'nvim_lua' },
             },
             completion = {
                 completeopt = 'menu,menuone,noselect,popup,noinsert',
