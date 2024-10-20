@@ -16,22 +16,20 @@ return {
 
 {'nvim-treesitter/nvim-treesitter',
     event = {'BufReadPost', 'BufNewFile'},
-    build = function()
-        vim.cmd('TSUpdate')
-    end,
+    run = ':TSUpdate',
     opts = {
         ensure_installed = {
             'arduino','awk','bash','bibtex','c','cmake', 'commonlisp',
             'cpp','css','csv','diff','dot', 'doxygen', 'fortran',
             'git_config', 'git_rebase','gitattributes','gitcommit', 'gitignore',
             'haskell', 'html', 'ini', 'javascript','json','latex','lua', 'make',
-            'markdown','markdown_inline','ninja','passwd','python','r','regex','sql',
-            'ssh_config', 'strace', 'tmux', 'todotxt', 'vim', 'vimdoc', 'xml', 'yaml',
+            'markdown','markdown_inline','ninja','passwd','python','r','regex', 'rnoweb',
+            'sql', 'ssh_config', 'strace', 'tmux', 'todotxt', 'vim', 'vimdoc', 'xml', 'yaml',
         },
         auto_install = true,
         highlight = {
             enable = true,
-            -- additional_vim_regex_highlighting = false,
+            additional_vim_regex_highlighting = false,
         },
         indent = {
             enable = true,
@@ -151,10 +149,10 @@ return {
         {'hrsh7th/cmp-path', },
         {'amarakon/nvim-cmp-lua-latex-symbols', },
         {'hrsh7th/cmp-nvim-lua', },
+        {'R-nvim/cmp-r',}
 --        {'ray-x/cmp-treesitter', },
 --        {'bydlw98/cmp-env', },
 --        'jalvesaq/cmp-nvim-r',
---        {'R-nvim/cmp-r',}
     },
     -- We cannot use opts directly because this plugin needs to refer to
     -- itself during configuration 
@@ -190,6 +188,7 @@ return {
                 { name = 'path' },
                 { name = 'nvim_cmp_lua_latex_symbols' },
                 { name = 'nvim_lua' },
+                { name = 'cmp_r' },
             },
             completion = {
                 completeopt = 'menu,menuone,noselect,popup,noinsert',
@@ -240,6 +239,9 @@ return {
     config = function(_, opts)
         require('outline').setup(opts)
     end,
+},
+
+{'R-nvim/R.nvim'
 },
 
 -- {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
