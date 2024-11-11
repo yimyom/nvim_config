@@ -60,7 +60,7 @@ return {
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = {
         {'<leader>ld', vim.lsp.buf.definition,
-            noremap=true, silent=true, desc='Jump to the definition of the symbol under the cursor'},
+            mode='n', noremap=true, silent=true, desc="Jump to the symbol's definition under the cursor"},
         {'<leader>lh', vim.lsp.buf.hover,
             mode='n', noremap=true, silent=true, desc='Symbol help information'},
         {'<leader>li', vim.lsp.buf.implementation,
@@ -78,7 +78,7 @@ return {
         {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>',
             noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
         {'<leader>la', vim.lsp.buf.code_action,
-            mode='n', noremap = true, silent=true, desc='Show all applicable code actions at the cursor'},
+            mode='n', noremap=true, silent=true, desc='Show all applicable code actions at the cursor'},
     },
     opts = {
         servers = {
@@ -140,7 +140,8 @@ return {
     cmd = { 'Outline', 'OutlineOpen' },
     keys =
     {
-        { '<leader>lo', '<cmd>Outline<CR>', desc = 'Display symbols outline' },
+        {'<leader>lo', '<cmd>Outline<CR>',
+          mode='n', noremap=true, silent=true, desc = 'Display list of symbols'},
     },
     opts = { },
 },
@@ -176,8 +177,7 @@ return {
 
 },
 
-{
-    'ray-x/lsp_signature.nvim',
+{'ray-x/lsp_signature.nvim',
     event = 'InsertEnter',
     opts =
     {
@@ -195,6 +195,17 @@ return {
             border = 'rounded', -- "shadow", --{"╭", "─" ,"╮", "│", "╯", "─", "╰", "│" },
         },
     },
+},
+
+{'Chaitanyabsprip/fastaction.nvim',
+    opts = {},
+    keys =
+    {
+        {'<leader>ca', '<cmd>lua require("fastaction").code_action()<CR>',
+            mode='n', noremap=true, silent=true, desc='Use a code action at the cursor'},
+        {'<leader>cr', '<cmd>lua require("fastaction").range_code_action()<CR>',
+            mode='n', noremap=true, silent=true, desc='Use a code action to a selected range'},
+    }
 },
 
 -- Misc.

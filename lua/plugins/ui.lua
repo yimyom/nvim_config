@@ -10,9 +10,9 @@
 -- Plugins working automatically without invokation from the user
 return {
 
--- {'MunifTanjim/nui.nvim',
---    lazy = true
--- },
+{'MunifTanjim/nui.nvim',
+    lazy = true
+},
 
 {'echasnovski/mini.icons',
     version = false
@@ -207,6 +207,7 @@ return {
             { lhs = '<leader>l', group = 'LSP and languages', desc = 'LSP and languages' },
             { lhs = '<leader>g', group = 'Git', desc = 'Git' },
             { lhs = '<leader>t', group = 'Trouble and diagnostics', desc = 'Trouble and diagnostics' },
+            { lhs = '<leader>c', group = 'Code actions', desc = 'Code actions' },
         }
     },
     init = function()
