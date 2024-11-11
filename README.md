@@ -68,6 +68,8 @@ Of course, you might want to put the git repository somewhere else. In that case
 |                          |   **\li**    | Symbol implementation                                 |
 |                          |   **\lt**    | Symbol type definition                                |
 |                          |   **\lo**    | Display symbol outline                                |
+| Code actions             |   **\ca**    | Code actions at the cursor's position                 |
+|                          |   **\cr**    | Code actions at the selected range                    |
 | Troubles and diagnostics |              |                                                       |
 |                          |   **\td**    | Open document diagnostics window                      | 
 |                          |   **\tx**    | Open Trouble window                                   |
@@ -77,25 +79,13 @@ Of course, you might want to put the git repository somewhere else. In that case
   
 # About the plugins
 
-## User interface
-### Color schemes
+## Color schemes
 - [catpuccin](https://github.com/catppuccin/nvim) is the default
 - [tokyonight](https://github.com/folke/tokyonight.nvim)
 - [sonokai](https://github.com/sainnhe/sonokai)
+- [everforest](https://github.com/neanias/everforest-nvim)
+
 To change the default colorscheme, go to the file `lua/plugins/ui.lua`, search for lines containing `vim.cmd.colorscheme` and uncomment the one you want to use by default. Make sure all the other lines containing the same string and commented out.
-
-### User interface plugins
-- **nvim-web-devicons**: to display nice icons everywhere, like the top bar, status bar, file manager, etc...
-- **catpuccin, tokyonight**: nice colorschemes
-- **indent-blankline**: add vertical indent lines to your programs to help understaning the structure of your code
-- **lualine**: the status bar is enhanced
-- **barbar**: a top bar with the open tabs: you can click, move them, close them, reorder them
-- **wilder**: a nicer pop-up menu when in command mode
-  - when you press <TAB> a pop-up menu will appear with possible choices when you're on the command line (`:`).
-  - when in search mode (`/` or `?`), the status bar will contain the possible completions instead of having a pop-up menu which overlaps the main text window
-- **trouble**: open the quick fix window with all the problems in your code
-
-# Utilities
 
 # Languages support
 ## LSP
