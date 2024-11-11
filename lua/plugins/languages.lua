@@ -1,18 +1,15 @@
--- 1+1= 
 -- This file is part of nvim_config.
 -- nvim_config is free software: you can redistribute it and/or modify it under the terms of the
 -- GNU General Public License as published by the Free Software Foundation, either version 3 of
 -- the License, or (at your option) any later version. nvim_config is distributed in the hope 
--- that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- that it will be useful, but WITHOUT ANY WARRANTY; with-ignout even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 -- more details. You should have received a copy of the GNU General Public License along with
 -- nvim_config. If not, see <https://www.gnu.org/licenses/>.
 
 return {
 
-{'aklt/plantuml-syntax', -- PlantUML syntax
-    ft='plantuml',
-},
+-- Treesitter
 
 {'nvim-treesitter/nvim-treesitter',
     event = {'BufReadPost', 'BufNewFile'},
@@ -39,6 +36,8 @@ return {
         require('nvim-treesitter.configs').setup(opts)
     end,
 },
+
+-- LSP
 
 {'williamboman/mason.nvim',    -- Package manager to install LSP servers, linters, formatters and debuggers
     lazy = false,
@@ -78,6 +77,8 @@ return {
             noremap=true, silent=true, desc='C++ type hierarchy (from clangd)'},
         {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>',
             noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
+        {'<leader>la', vim.lsp.buf.code_action,
+            mode='n', noremap = true, silent=true, desc='Show all applicable code actions at the cursor'},
     },
     opts = {
         servers = {
@@ -134,8 +135,72 @@ return {
     end,
 },
 
+{'hedyhli/outline.nvim',
+    lazy = true,
+    cmd = { 'Outline', 'OutlineOpen' },
+    keys =
+    {
+        { '<leader>lo', '<cmd>Outline<CR>', desc = 'Display symbols outline' },
+    },
+    opts = { },
+},
+
 {'onsails/lspkind.nvim',
     event='LspAttach',
+},
+
+{'kosayoda/nvim-lightbulb',
+    event='LspAttach',
+    opts =
+    {
+        sign =
+        {
+            enabled = true,
+            text = "💡",
+            lens_text = "🔎",
+            hl = "LightBulbSign",
+        },
+        virtual_text =
+        {
+            enabled = false,
+            text = "💡",
+            lens_text = "🔎",
+            pos = "eol",
+            hl = "LightBulbVirtualText",
+            hl_mode = "combine",
+        },
+    },
+},
+
+{'RishabhRD/nvim-lsputils',
+
+},
+
+{
+    'ray-x/lsp_signature.nvim',
+    event = 'InsertEnter',
+    opts =
+    {
+        bind = true,
+        floating_window = true,
+        -- floating_window_above_cur_line = false,
+        hint_enable = true,
+        fix_pos = false,
+        -- floating_window_above_first = true,
+        zindex = 1002,
+        timer_interval = 100,
+        extra_trigger_chars = {},
+        handler_opts =
+        {
+            border = 'rounded', -- "shadow", --{"╭", "─" ,"╮", "│", "╯", "─", "╰", "│" },
+        },
+    },
+},
+
+-- Misc.
+
+{'aklt/plantuml-syntax', -- PlantUML syntax
+    ft='plantuml',
 },
 
 {'hrsh7th/nvim-cmp',
@@ -228,19 +293,6 @@ return {
     end,
 },
 
-{'hedyhli/outline.nvim',
-    lazy = true,
-    cmd = { 'Outline', 'OutlineOpen' },
-    keys =
-    {
-        { '<leader>lo', '<cmd>Outline<CR>', desc = 'Display symbols outline' },
-    },
-    opts = { },
-    config = function(_, opts)
-        require('outline').setup(opts)
-    end,
-},
-
 {'R-nvim/R.nvim'
 },
 
@@ -256,18 +308,6 @@ return {
 --        require('clangd_extensions').setup(opts)
 --    end,
 --    },
--- },
-
--- {'nvimdev/lspsaga.nvim',
---     event = 'LspAttach',
---     opts = {
---         ui = {
---             border = 'rounded',
---         },
---         outline = {
---             layout = 'float',
---         },
---     },
 -- },
 
 }
