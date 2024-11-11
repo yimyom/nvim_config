@@ -77,8 +77,6 @@ return {
             noremap=true, silent=true, desc='C++ type hierarchy (from clangd)'},
         {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>',
             noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
-        {'<leader>la', vim.lsp.buf.code_action,
-            mode='n', noremap=true, silent=true, desc='Show all applicable code actions at the cursor'},
     },
     opts = {
         servers = {
