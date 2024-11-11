@@ -18,8 +18,8 @@ return {
     version = false
 },
 
--- {'RishabhRD/popfix'
--- },
+{'RishabhRD/popfix'
+},
 
 -- --------------------------------
 -- Colorscheme
