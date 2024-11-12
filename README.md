@@ -70,12 +70,6 @@ Of course, you might want to put the git repository somewhere else. In that case
 |                          |   **\lo**    | Display symbol outline                                |
 | Code actions             |   **\ca**    | Code actions at the cursor's position                 |
 |                          |   **\cr**    | Code actions at the selected range                    |
-| Troubles and diagnostics |              |                                                       |
-|                          |   **\td**    | Open document diagnostics window                      | 
-|                          |   **\tx**    | Open Trouble window                                   |
-|                          |   **\tl**    | Open location list                                    |
-|                          |   **\tq**    | Open QuickFix window                                  |
-|                          |   **\tw**    | Open workspace diagnostics window                     |
   
 # About the plugins
 
