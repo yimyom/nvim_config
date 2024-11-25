@@ -14,8 +14,10 @@ return {
 {'nvim-treesitter/nvim-treesitter',
     event = {'BufReadPost', 'BufNewFile'},
     run = ':TSUpdate',
-    opts = {
-        ensure_installed = {
+    opts =
+    {
+        ensure_installed =
+        {
             'arduino','awk','bash','bibtex','c','cmake', 'commonlisp',
             'cpp','css','csv','diff','dot', 'doxygen', 'fortran',
             'git_config', 'git_rebase','gitattributes','gitcommit', 'gitignore',
@@ -24,11 +26,13 @@ return {
             'sql', 'ssh_config', 'strace', 'tmux', 'todotxt', 'vim', 'vimdoc', 'xml', 'yaml',
         },
         auto_install = true,
-        highlight = {
+        highlight =
+        {
             enable = true,
             additional_vim_regex_highlighting = false,
         },
-        indent = {
+        indent =
+        {
             enable = true,
         },
     },
@@ -206,11 +210,23 @@ return {
     }
 },
 
--- Misc.
-
-{'aklt/plantuml-syntax', -- PlantUML syntax
-    ft='plantuml',
+{'p00f/clangd_extensions.nvim', -- Extra clang LSP features
+    lazy = true,
+    ft = {'c', 'cpp', 'objc', 'objcpp'},
+    opts =
+    {
+        inlay_hints =
+        {
+            parameter_hints_prefix = '← ',
+            other_hints_prefix = '⇒ ',
+        },
+    },
+    config = function(_,opts)
+        require('clangd_extensions').setup(opts)
+        end,
 },
+
+-- Completion
 
 {'hrsh7th/nvim-cmp',
     event='InsertEnter',
@@ -243,8 +259,7 @@ return {
                 { name = 'calc' },
                 { name = 'buffer',
                     option = {
-                        -- fct to index only in visible buffers if their size does not
-                        -- exceed 2 Mb
+                        -- fct to index only in visible buffers if their size does not exceed 2 Mb
                         get_bufnrs = function()
                             local bufs = {}
                             for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -268,12 +283,8 @@ return {
                 completeopt = 'menu,menuone,noselect,popup,noinsert',
             },
             window = {
-                completion = {
-                    border = 'rounded',
-                },
-                documentation = {
-                    border = 'rounded',
-                },
+                completion = { border = 'rounded', },
+                documentation = { border = 'rounded', },
             },
             sorting = {
                 comparators = {
@@ -284,11 +295,11 @@ return {
             },
             mapping = {
                 ['<Tab>'] = cmp.mapping.select_next_item(),
-                ['<S-Tab>']=require('cmp').mapping.select_prev_item(),
-                ['<C-Space>'] = require('cmp').mapping.complete(),
-                ['<CR>'] = require('cmp').mapping.confirm({
-                    behavior = require('cmp').ConfirmBehavior.Insert,
-                    select = true,
+                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<CR>'] = cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Insert,
+                    select = false,
                 })
             },
             formatting = {
@@ -302,21 +313,12 @@ return {
     end,
 },
 
-{'R-nvim/R.nvim'
+-- Misc.
+
+{'aklt/plantuml-syntax', -- PlantUML syntax
+    ft='plantuml',
 },
 
--- {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
---    lazy = false,
---    ft = {'c', 'cpp', 'objc', 'objcpp'},
---    opts = {
---        inlay_hints = {
---            parameter_hints_prefix = '← ',
---            other_hints_prefix = '⇒ ',
---        },
---    config = function(_,opts)
---        require('clangd_extensions').setup(opts)
---    end,
---    },
--- },
-
+{'R-nvim/R.nvim'
+},
 }
