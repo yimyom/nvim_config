@@ -27,16 +27,6 @@ return {
     lazy = false,
 },
 
--- {'folke/trouble.nvim',
---     keys = {
---         {'<leader>tx', '<cmd>lua require("trouble").open()<cr>', noremap=true, silent=true, desc='Open Trouble window'},
---         {'<leader>tw', '<cmd>lua require("trouble").open("workspace_diagnostics")<cr>', noremap=true, silent=true, desc='Open workspace diagnostics window'},
---         {'<leader>td', '<cmd>lua require("trouble").open("document_diagnostics")<cr>', noremap=true, silent=true, desc='Open document diagnostics window'},
---         {'<leader>tq', '<cmd>lua require("trouble").open("quickfix")<cr>', noremap=true, silent=true, desc='Open QuickFix window'},
---         {'<leader>tl', '<cmd>lua require("trouble").open("loclist")<cr>', noremap=true, silent=true, desc='Open location list'},
---     },
--- },
-
 {'nvim-neo-tree/neo-tree.nvim',
     lazy = true,
     cmd = 'Neotree',
@@ -118,16 +108,7 @@ return {
     },
 },
 
--- {'niuiic/git-log.nvim',
---     event = {'BufReadPre','BufNewFile'},
---     dependencies = {'niuiic/core.nvim'},
---     keys = {
---         {'<leader>go', '<cmd>lua require("git-log").check_log()<cr>', noremap=true, silent=true, desc='Display the git log for the selected text'},
---     },
--- },
-
-{
-    'ragnarok22/whereami.nvim',
+{'ragnarok22/whereami.nvim',
     cmd = "Whereami"
 },
 
