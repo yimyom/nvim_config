@@ -18,12 +18,12 @@ return {
     {
         ensure_installed =
         {
-            'arduino','awk','bash','bibtex','c','cmake', 'commonlisp',
-            'cpp','css','csv','diff','dot', 'doxygen', 'fortran',
-            'git_config', 'git_rebase','gitattributes','gitcommit', 'gitignore',
-            'haskell', 'html', 'ini', 'javascript','json','latex','lua', 'make',
-            'markdown','markdown_inline','ninja','passwd','python','r','regex', 'rnoweb',
-            'sql', 'ssh_config', 'strace', 'tmux', 'todotxt', 'vim', 'vimdoc', 'xml', 'yaml',
+            'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
+            'cpp','css','csv','diff','dot','doxygen', 'fortran','git_config','git_rebase',
+            'gitattributes','gitcommit','gitignore','haskell','html','idl','ini','javascript',
+            'json','latex','lua','make','markdown','markdown_inline','nasm','ninja','passwd',
+            'printf','properties','proto','python','r','readline','regex','rnoweb','scheme',
+            'sql','ssh_config','strace','tmux','todotxt','vim','vimdoc','xml','yaml',
         },
         auto_install = true,
         highlight =
@@ -137,15 +137,25 @@ return {
     end,
 },
 
-{'hedyhli/outline.nvim',
-    lazy = true,
-    cmd = { 'Outline', 'OutlineOpen' },
-    keys =
+-- {'hedyhli/outline.nvim',
+--     lazy = true,
+--     cmd = { 'Outline', 'OutlineOpen' },
+--     keys =
+--     {
+--         {'<leader>lo', '<cmd>Outline<CR>',
+--           mode='n', noremap=true, silent=true, desc = 'Display list of symbols'},
+--     },
+--     opts = { },
+-- },
+
+{'stevearc/aerial.nvim',
+    event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
+    opts = {},
+    dependencies =
     {
-        {'<leader>lo', '<cmd>Outline<CR>',
-          mode='n', noremap=true, silent=true, desc = 'Display list of symbols'},
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-tree/nvim-web-devicons'
     },
-    opts = { },
 },
 
 {'onsails/lspkind.nvim',
@@ -173,10 +183,6 @@ return {
             hl_mode = "combine",
         },
     },
-},
-
-{'RishabhRD/nvim-lsputils',
-
 },
 
 {'ray-x/lsp_signature.nvim',
