@@ -137,17 +137,6 @@ return {
     end,
 },
 
--- {'hedyhli/outline.nvim',
---     lazy = true,
---     cmd = { 'Outline', 'OutlineOpen' },
---     keys =
---     {
---         {'<leader>lo', '<cmd>Outline<CR>',
---           mode='n', noremap=true, silent=true, desc = 'Display list of symbols'},
---     },
---     opts = { },
--- },
-
 {'stevearc/aerial.nvim',
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     opts = {},
@@ -155,6 +144,11 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         'nvim-tree/nvim-web-devicons'
+    },
+    keys =
+    {
+        {'<leader>lo', '<cmd>AerialToggle<CR>',
+          mode='n', noremap=true, silent=true, desc='Display a list of symbols'},
     },
 },
 
