@@ -37,3 +37,17 @@ vim.o.foldtext= [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g
 vim.o.smartindent = false
 vim.o.cindent = false
 vim.o.cinoptions='>s,e0,n0,f0,{1s,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,E0,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,k0,m0,j0,J0,)20,*70,#0,P0'
+
+-- Inline diagnostics (virtual text)
+vim.diagnostic.config(
+    {
+        signs = true,         -- Keep gutter signs (E/W)
+        virtual_text =
+        {
+            source = 'if_many',
+            prefix = '●',
+        },
+})
+
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { ctermfg = 1, fg = '#ff0000', italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { ctermfg = 3, fg = '#ffff00' })
