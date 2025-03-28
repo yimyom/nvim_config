@@ -10,10 +10,6 @@
 -- Plugins working automatically without invokation from the user
 return {
 
-{'MunifTanjim/nui.nvim',
-    lazy = true
-},
-
 {'echasnovski/mini.icons',
     version = false
 },
