@@ -17,6 +17,9 @@ return {
 {'RishabhRD/popfix'
 },
 
+{'nvim-lua/plenary.nvim'
+},
+
 -- --------------------------------
 -- Colorscheme
 -- --------------------------------
