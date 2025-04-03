@@ -156,29 +156,6 @@ return {
     event='LspAttach',
 },
 
-{'kosayoda/nvim-lightbulb',
-    event='LspAttach',
-    opts =
-    {
-        sign =
-        {
-            enabled = true,
-            text = "💡",
-            lens_text = "🔎",
-            hl = "LightBulbSign",
-        },
-        virtual_text =
-        {
-            enabled = false,
-            text = "💡",
-            lens_text = "🔎",
-            pos = "eol",
-            hl = "LightBulbVirtualText",
-            hl_mode = "combine",
-        },
-    },
-},
-
 {'ray-x/lsp_signature.nvim',
     event = 'InsertEnter',
     opts =
@@ -235,15 +212,17 @@ return {
         {'hrsh7th/cmp-nvim-lsp', },
         {'hrsh7th/cmp-nvim-lsp-signature-help', },
         {'hrsh7th/cmp-nvim-lsp-document-symbol', },
-        {'hrsh7th/cmp-calc', },
+
         {'hrsh7th/cmp-buffer', },
         {'hrsh7th/cmp-path', },
         {'amarakon/nvim-cmp-lua-latex-symbols', },
         {'hrsh7th/cmp-nvim-lua', },
-        {'R-nvim/cmp-r',}
---        {'ray-x/cmp-treesitter', },
---        {'bydlw98/cmp-env', },
---        'jalvesaq/cmp-nvim-r',
+
+        {'R-nvim/cmp-r',},
+        {'jalvesaq/cmp-nvim-r',},
+
+        {'bydlw98/cmp-env', },
+        {'ray-x/cmp-treesitter', },
     },
     -- We cannot use opts directly because this plugin needs to refer to
     -- itself during configuration 
@@ -257,7 +236,7 @@ return {
                 { name = 'nvim_lsp' },
                 { name = 'nvim_lsp_signature_help' },
                 { name = 'nvim_lsp_document_symbol' },
-                { name = 'calc' },
+
                 { name = 'buffer',
                     option = {
                         -- fct to index only in visible buffers if their size does not exceed 2 Mb
@@ -278,6 +257,7 @@ return {
                 { name = 'path' },
                 { name = 'nvim_cmp_lua_latex_symbols' },
                 { name = 'nvim_lua' },
+
                 { name = 'cmp_r' },
             },
             completion = {
