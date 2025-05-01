@@ -40,6 +40,7 @@ return {
         require('nvim-treesitter.configs').setup(opts)
     end,
 },
+{'nvim-treesitter/nvim-treesitter', },
 
 -- LSP
 
@@ -208,21 +209,28 @@ return {
 
 {'hrsh7th/nvim-cmp',
     event='InsertEnter',
-    dependencies = {
+    dependencies =
+    {
+        -- LSP-related
         {'hrsh7th/cmp-nvim-lsp', },
         {'hrsh7th/cmp-nvim-lsp-signature-help', },
         {'hrsh7th/cmp-nvim-lsp-document-symbol', },
 
+        -- Treesitter
+        {'ray-x/cmp-treesitter', },
+
+        -- Misc
         {'hrsh7th/cmp-buffer', },
         {'hrsh7th/cmp-path', },
-        {'amarakon/nvim-cmp-lua-latex-symbols', },
-        {'hrsh7th/cmp-nvim-lua', },
-
-        {'R-nvim/cmp-r',},
-        {'jalvesaq/cmp-nvim-r',},
-
         {'bydlw98/cmp-env', },
-        {'ray-x/cmp-treesitter', },
+
+        -- Language-specific
+        {'hrsh7th/cmp-nvim-lua', },
+        {'amarakon/nvim-cmp-lua-latex-symbols', },
+        {'R-nvim/cmp-r', },
+
+        -- Icons
+        {'onsails/lspkind.nvim'},
     },
     -- We cannot use opts directly because this plugin needs to refer to
     -- itself during configuration 
@@ -231,13 +239,17 @@ return {
         local cmp_buffer = require('cmp_buffer')
         local lspkind = require('lspkind')
 
-        cmp.setup({
-            sources = {
-                { name = 'nvim_lsp' },
-                { name = 'nvim_lsp_signature_help' },
-                { name = 'nvim_lsp_document_symbol' },
-
-                { name = 'buffer',
+        cmp.setup(
+        {
+            sources = cmp.config.sources(
+            {
+                { name = 'nvim_lsp', priority = 100 },
+                { name = 'treesitter', priority = 90 },
+                { name = 'nvim_lsp_signature_help', priority = 85 },
+                { name = 'cmp_r', priority = 80 },
+                { name = 'nvim_lua', priority = 75 },
+                { name = 'lua-latex-symbols', option = { cache = true }, priority= 70 },
+                { name = 'buffer', priority = 60,
                     option = {
                         -- fct to index only in visible buffers if their size does not exceed 2 Mb
                         get_bufnrs = function()
@@ -246,7 +258,7 @@ return {
                                 local buf = vim.api.nvim_win_get_buf(win)
                                 local bytes = vim.api.nvim_buf_get_offset(buf,
                                     vim.api.nvim_buf_line_count(buf))
-                                if bytes > 2*1024*1024 then-- 2 megabytes max
+                                if bytes <= 2*1024*1024 then -- 2 megabytes max
                                     bufs[buf] = true
                                 end
                             end
@@ -254,39 +266,61 @@ return {
                         end
                     },
                 },
-                { name = 'path' },
-                { name = 'nvim_cmp_lua_latex_symbols' },
-                { name = 'nvim_lua' },
-
-                { name = 'cmp_r' },
-            },
-            completion = {
-                completeopt = 'menu,menuone,noselect,popup,noinsert',
-            },
-            window = {
+                { name = 'path', priority = 50 },
+                { name = 'env', priority = 40 },
+                { name = 'nvim_lsp_document_symbol', priority = 30 },
+            }),
+            completion = { completeopt = 'menu,menuone,noselect', },
+            window =
+            {
                 completion = { border = 'rounded', },
                 documentation = { border = 'rounded', },
             },
-            sorting = {
-                comparators = {
+            sorting =
+            {
+                comparators =
+                {
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.recently_used,
+                    cmp.config.compare.locality,
+                    cmp.config.compare.kind,  -- Prioritize LSP items
                     function(...)
                         return cmp_buffer:compare_locality(...)
                     end,
                 }
             },
-            mapping = {
+            mapping =
+            {
                 ['<Tab>'] = cmp.mapping.select_next_item(),
                 ['<S-Tab>'] = cmp.mapping.select_prev_item(),
                 ['<C-Space>'] = cmp.mapping.complete(),
-                ['<CR>'] = cmp.mapping.confirm({
-                    behavior = cmp.ConfirmBehavior.Insert,
-                    select = false,
-                })
+                ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false, }),
             },
-            formatting = {
-                format = lspkind.cmp_format({
+            formatting =
+            {
+                format = lspkind.cmp_format(
+                {
+                    mode = 'symbol_text',
                     maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
                     ellipsis_char = '...',
+                    symbol_map =
+                    {
+                        Text = "󰉿",
+                        Method = "󰆧",
+                        Function = "󰊕",
+                        Constructor = "",
+                    },
+                    before = function(entry, vim_item)
+                        vim_item.menu = ({
+                            nvim_lsp = "[LSP]",
+                            treesitter = "[TS]",
+                            buffer = "[BUF]",
+                            path = "[PATH]",
+                        })[entry.source.name]
+                        return vim_item
+                    end,
                     show_labelDetails = true,
                 }),
             },
@@ -300,6 +334,6 @@ return {
     ft='plantuml',
 },
 
-{'R-nvim/R.nvim'
-},
+{'R-nvim/R.nvim' },
+
 }
