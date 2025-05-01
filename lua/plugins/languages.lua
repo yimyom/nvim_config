@@ -163,7 +163,7 @@ return {
     {
         bind = true,
         floating_window = true,
-        -- floating_window_above_cur_line = false,
+        floating_window_above_cur_line = false,
         hint_enable = true,
         fix_pos = false,
         -- floating_window_above_first = true,
@@ -257,10 +257,11 @@ return {
                             local bufs = {}
                             for _, win in ipairs(vim.api.nvim_list_wins()) do
                                 local buf = vim.api.nvim_win_get_buf(win)
-                                local bytes = vim.api.nvim_buf_get_offset(buf,
-                                    vim.api.nvim_buf_line_count(buf))
-                                if bytes <= 2*1024*1024 then -- 2 megabytes max
-                                    bufs[buf] = true
+                                if vim.api.nvim_buf_is_valid(buf) then
+                                    local bytes = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                                    if bytes <= 2*1024*1024 then -- 2 megabytes max
+                                        bufs[buf] = true
+                                    end
                                 end
                             end
                             return vim.tbl_keys(bufs)
@@ -291,7 +292,6 @@ return {
                     cmp.config.compare.sort_text,
                     cmp.config.compare.length,
                     cmp.config.compare.order,
-                    require('cmp_buffer').compare_locality,
                 }
             },
             mapping =
