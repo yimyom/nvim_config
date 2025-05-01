@@ -228,6 +228,7 @@ return {
         {'hrsh7th/cmp-nvim-lua', },
         {'amarakon/nvim-cmp-lua-latex-symbols', },
         {'R-nvim/cmp-r', },
+        {'lukas-reineke/cmp-under-comparator', },
 
         -- Icons
         {'onsails/lspkind.nvim'},
@@ -283,12 +284,14 @@ return {
                     cmp.config.compare.offset,
                     cmp.config.compare.exact,
                     cmp.config.compare.score,
+                    require('cmp-under-comparator').under,
                     cmp.config.compare.recently_used,
                     cmp.config.compare.locality,
                     cmp.config.compare.kind,  -- Prioritize LSP items
-                    function(...)
-                        return cmp_buffer:compare_locality(...)
-                    end,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                    require('cmp_buffer').compare_locality,
                 }
             },
             mapping =
@@ -312,14 +315,16 @@ return {
                         Function = "󰊕",
                         Constructor = "",
                     },
-                    before = function(entry, vim_item)
-                        vim_item.menu = ({
+                    before = function(entry, item)
+                        local menu_icon = 
+                        {
                             nvim_lsp = "[LSP]",
                             treesitter = "[TS]",
                             buffer = "[BUF]",
                             path = "[PATH]",
-                        })[entry.source.name]
-                        return vim_item
+                        }
+                        item.menu = menu_icon[entry.source.name]
+                        return item
                     end,
                     show_labelDetails = true,
                 }),
