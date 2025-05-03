@@ -9,8 +9,9 @@
 
 return {
 
+----------------------------------
 -- Treesitter
-
+----------------------------------
 {'nvim-treesitter/nvim-treesitter',
     event = {'BufReadPost', 'BufNewFile'},
     run = ':TSUpdate',
@@ -19,11 +20,13 @@ return {
         ensure_installed =
         {
             'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
-            'cpp','css','csv','diff','dot','doxygen', 'fortran','git_config','git_rebase',
-            'gitattributes','gitcommit','gitignore','haskell','html','idl','ini','javascript',
-            'json','latex','lua','make','markdown','markdown_inline','nasm','ninja','passwd',
-            'printf','properties','proto','python','r','readline','regex','rnoweb','scheme',
-            'sql','ssh_config','strace','tmux','todotxt','vim','vimdoc','xml','yaml',
+            'cpp','css','csv','cuda','desktop','diff','disassembly','dot','doxygen',
+            'fortran','git_config','git_rebase','gitattributes','gitcommit','gitignore',
+            'haskell','html','idl','ini','javascript','json','latex','llvm','lua','luadoc',
+            'make','markdown','markdown_inline','nasm','ninja','passwd','po','printf',
+            'properties','proto','python','query','r','readline','regex','rnoweb','robots',
+            'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim','vimdoc',
+            'xml','yaml','zig'
         },
         auto_install = true,
         highlight =
@@ -40,10 +43,10 @@ return {
         require('nvim-treesitter.configs').setup(opts)
     end,
 },
-{'nvim-treesitter/nvim-treesitter', },
 
+----------------------------------
 -- LSP
-
+----------------------------------
 {'williamboman/mason.nvim',    -- Package manager to install LSP servers, linters, formatters and debuggers
     lazy = false,
     cmd = 'Mason',
@@ -62,6 +65,7 @@ return {
 },
 
 {'neovim/nvim-lspconfig',   -- Configure and start language servers when appropriate
+    dependencies = {'saghen/blink.cmp' },
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = {
         {'<leader>ld', vim.lsp.buf.definition,
@@ -124,18 +128,11 @@ return {
     },
     config = function(_, opts)
         local lspconfig = require('lspconfig')
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-        local on_attach = function(client, bufnr)
-            vim.g.completion_matching_strategy_list = "['exact','substring','fuzzy']"
+        for server, config in pairs(opts.servers) do
+            config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+            lspconfig[server].setup(config)
         end
-
-        -- Configure each server individually
-        for server,server_config in pairs(opts.servers) do
-            server_config['capabilities'] = capabilities
-            lspconfig[server].setup(server_config)
-        end
-    end,
+    end
 },
 
 {'stevearc/aerial.nvim',
@@ -157,26 +154,6 @@ return {
     event='LspAttach',
 },
 
-{'ray-x/lsp_signature.nvim',
-    event = 'InsertEnter',
-    opts =
-    {
-        bind = true,
-        floating_window = true,
-        floating_window_above_cur_line = false,
-        hint_enable = true,
-        fix_pos = false,
-        -- floating_window_above_first = true,
-        zindex = 1002,
-        timer_interval = 100,
-        extra_trigger_chars = {},
-        handler_opts =
-        {
-            border = 'rounded', -- "shadow", --{"╭", "─" ,"╮", "│", "╯", "─", "╰", "│" },
-        },
-    },
-},
-
 {'Chaitanyabsprip/fastaction.nvim',
     opts = {},
     keys =
@@ -188,6 +165,9 @@ return {
     }
 },
 
+----------------------------------
+-- C++
+----------------------------------
 {'p00f/clangd_extensions.nvim', -- Extra clang LSP features
     lazy = true,
     ft = {'c', 'cpp', 'objc', 'objcpp'},
@@ -205,140 +185,87 @@ return {
     },
 },
 
--- Completion
-
-{'hrsh7th/nvim-cmp',
-    event='InsertEnter',
-    dependencies =
-    {
-        -- LSP-related
-        {'hrsh7th/cmp-nvim-lsp', },
-        {'hrsh7th/cmp-nvim-lsp-signature-help', },
-        {'hrsh7th/cmp-nvim-lsp-document-symbol', },
-
-        -- Treesitter
-        {'ray-x/cmp-treesitter', },
-
-        -- Misc
-        {'hrsh7th/cmp-buffer', },
-        {'hrsh7th/cmp-path', },
-        {'bydlw98/cmp-env', },
-
-        -- Language-specific
-        {'hrsh7th/cmp-nvim-lua', },
-        {'amarakon/nvim-cmp-lua-latex-symbols', },
-        {'R-nvim/cmp-r', },
-        {'lukas-reineke/cmp-under-comparator', },
-
-        -- Icons
-        {'onsails/lspkind.nvim'},
-    },
-    -- We cannot use opts directly because this plugin needs to refer to
-    -- itself during configuration 
-    config = function()
-        local cmp = require('cmp')
-        local cmp_buffer = require('cmp_buffer')
-        local lspkind = require('lspkind')
-
-        cmp.setup(
-        {
-            sources = cmp.config.sources(
-            {
-                { name = 'nvim_lsp', priority = 100 },
-                { name = 'treesitter', priority = 90 },
-                { name = 'nvim_lsp_signature_help', priority = 85 },
-                { name = 'cmp_r', priority = 80 },
-                { name = 'nvim_lua', priority = 75 },
-                { name = 'lua-latex-symbols', option = { cache = true }, priority= 70 },
-                { name = 'buffer', priority = 60,
-                    option = {
-                        -- fct to index only in visible buffers if their size does not exceed 2 Mb
-                        get_bufnrs = function()
-                            local bufs = {}
-                            for _, win in ipairs(vim.api.nvim_list_wins()) do
-                                local buf = vim.api.nvim_win_get_buf(win)
-                                if vim.api.nvim_buf_is_valid(buf) then
-                                    local bytes = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                                    if bytes <= 2*1024*1024 then -- 2 megabytes max
-                                        bufs[buf] = true
-                                    end
-                                end
-                            end
-                            return vim.tbl_keys(bufs)
-                        end
-                    },
-                },
-                { name = 'path', priority = 50 },
-                { name = 'env', priority = 40 },
-                { name = 'nvim_lsp_document_symbol', priority = 30 },
-            }),
-            completion = { completeopt = 'menu,menuone,noselect', },
-            window =
-            {
-                completion = { border = 'rounded', },
-                documentation = { border = 'rounded', },
-            },
-            sorting =
-            {
-                comparators =
-                {
-                    cmp.config.compare.offset,
-                    cmp.config.compare.exact,
-                    cmp.config.compare.score,
-                    require('cmp-under-comparator').under,
-                    cmp.config.compare.recently_used,
-                    cmp.config.compare.locality,
-                    cmp.config.compare.kind,  -- Prioritize LSP items
-                    cmp.config.compare.sort_text,
-                    cmp.config.compare.length,
-                    cmp.config.compare.order,
-                }
-            },
-            mapping =
-            {
-                ['<Tab>'] = cmp.mapping.select_next_item(),
-                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-                ['<C-Space>'] = cmp.mapping.complete(),
-                ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false, }),
-            },
-            formatting =
-            {
-                format = lspkind.cmp_format(
-                {
-                    mode = 'symbol_text',
-                    maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-                    ellipsis_char = '...',
-                    symbol_map =
-                    {
-                        Text = "󰉿",
-                        Method = "󰆧",
-                        Function = "󰊕",
-                        Constructor = "",
-                    },
-                    before = function(entry, item)
-                        local menu_icon = 
-                        {
-                            nvim_lsp = "[LSP]",
-                            treesitter = "[TS]",
-                            buffer = "[BUF]",
-                            path = "[PATH]",
-                        }
-                        item.menu = menu_icon[entry.source.name]
-                        return item
-                    end,
-                    show_labelDetails = true,
-                }),
-            },
-        })
-    end,
+----------------------------------
+-- R
+----------------------------------
+{'R-nvim/cmp-r',
 },
 
--- Misc.
+----------------------------------
+-- Completion
+----------------------------------
+{'saghen/blink.cmp',
+    event='InsertEnter',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts =
+    {
+        sources =
+        {
+            default = { 'lsp', 'path', 'snippets', 'buffer' },
+            compat = { cmp_r = { name='cmp_r', module='blink.compat.source' }, },
+        },
+        keymap =
+        {
+            preset = 'enter',
+            ['<A-1>'] = { function(cmp) cmp.accept({ index = 1 }) end },
+            ['<A-2>'] = { function(cmp) cmp.accept({ index = 2 }) end },
+            ['<A-3>'] = { function(cmp) cmp.accept({ index = 3 }) end },
+            ['<A-4>'] = { function(cmp) cmp.accept({ index = 4 }) end },
+            ['<A-5>'] = { function(cmp) cmp.accept({ index = 5 }) end },
+            ['<A-6>'] = { function(cmp) cmp.accept({ index = 6 }) end },
+            ['<A-7>'] = { function(cmp) cmp.accept({ index = 7 }) end },
+            ['<A-8>'] = { function(cmp) cmp.accept({ index = 8 }) end },
+            ['<A-9>'] = { function(cmp) cmp.accept({ index = 9 }) end },
+            ['<A-0>'] = { function(cmp) cmp.accept({ index = 10 }) end },
+        },
+        appearance = { nerd_font_variant = 'mono' },
+        completion =
+        {
+            documentation = { auto_show = true },
+            menu =
+            {
+                draw =
+                {
+                    padding = {0, 1},
+                    columns = {{'item_idx'}, {'kind_icon'}, {'label'}, {'label_description', gap=1}},
+                    components =
+                    {
+                        kind_icon = { text = function(ctx) return ' '.. ctx.kind_icon .. ctx.icon_gap .. ' ' end },
+                        item_idx =
+                        {
+                            text = function(ctx) return ctx.idx==10 and '0' or ctx.idx>=10 and ' ' or tostring(ctx.idx) end,
+                            highlight='BlinkCmpItemIdx',
+                        }
+                    }
+                }
+            }
+        },
+        fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, }
+    },
+    opts_extend = { "sources.default" }
+},
 
+--{'hrsh7th/nvim-cmp',
+--        {'hrsh7th/cmp-nvim-lua', },
+--        {'amarakon/nvim-cmp-lua-latex-symbols', },
+--
+--  { name = 'nvim_lua', priority = 75 },
+--  { name = 'lua-latex-symbols', option = { cache = true }, priority= 70 },
+--  { name = 'nvim_lsp_document_symbol', priority = 30 },
+--            mapping =
+--            {
+--                ['<Tab>'] = cmp.mapping.select_next_item(),
+--                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+--                ['<C-Space>'] = cmp.mapping.complete(),
+--                ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false, }),
+--            },
+
+----------------------------------
+-- Misc.
+----------------------------------
 {'aklt/plantuml-syntax', -- PlantUML syntax
     ft='plantuml',
-},
-
-{'R-nvim/R.nvim' },
-
 }
+
+} -- end of return
