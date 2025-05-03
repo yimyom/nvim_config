@@ -144,13 +144,8 @@ return {
 
         local popmenu_renderer = wilder.popupmenu_renderer(
             wilder.popupmenu_border_theme({
-                border = 'rounded',
                 highlighter = wilder.highlighter_with_gradient({wilder.basic_highlighter(), }),
-                highlights =
-                {
-                    border = 'Normal',
-                    gradient = gradient,
-                },
+                highlights = { gradient = gradient, },
                 left = {' ', wilder.popupmenu_devicons()},
                 right= {' ', wilder.popupmenu_scrollbar()},
                 pumblend=10,
@@ -188,10 +183,6 @@ return {
     event = 'VeryLazy',
     opts =
     {
-        win =
-        {
-            border = 'rounded',
-        },
         spec =
         {
             { lhs = '<leader>b', group = 'Buffers', desc = 'Buffers' },

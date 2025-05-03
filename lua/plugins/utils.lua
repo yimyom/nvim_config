@@ -33,8 +33,10 @@ return {
 
 {'lewis6991/gitsigns.nvim', -- Git signs in the vi gutter (+ on status line)
     event = {'BufReadPre','BufNewFile'},
-    opts = {
-         signs = {
+    opts =
+    {
+         signs =
+         {
             add = { text = "+" },
             change = { text = "~" },
             delete = { text = "-" },
@@ -42,9 +44,9 @@ return {
             changedelete = { text= "~" },
             untracked = { text = "┆" },
         },
-        preview_config = { border = 'rounded', },
     },
-    keys = {
+    keys =
+    {
 		{'<leader>gp', '<cmd>Gitsigns prev_hunk<cr>', mode='n', noremap=true, silent=true, desc='Previous git hunk'},
 		{'<leader>gn', '<cmd>Gitsigns next_hunk<cr>', mode='n', noremap=true, silent=true, desc='Next git hunk'},
 		{'<leader>gb', '<cmd>Gitsigns blame_line<cr>', mode='n', noremap=true, silent=true, desc='Blame line'},
