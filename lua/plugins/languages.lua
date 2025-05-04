@@ -150,10 +150,6 @@ return {
     },
 },
 
-{'onsails/lspkind.nvim',
-    event='LspAttach',
-},
-
 {'Chaitanyabsprip/fastaction.nvim',
     opts = {},
     keys =
@@ -194,20 +190,73 @@ return {
 ----------------------------------
 -- Completion
 ----------------------------------
+{'saghen/blink.compat', },
 {'saghen/blink.cmp',
     event='InsertEnter',
+    dependencies =
+    {
+        --'bydlw98/blink-cmp-env',
+        'MahanRahmati/blink-nerdfont.nvim',
+        'onsails/lspkind.nvim',
+        'R-nvim/cmp-r',
+    },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts =
     {
+        completion =
+        {
+            list = { selection = { preselect = false, auto_insert = true }, },
+            accept = { auto_brackets = { enabled = false }, },
+            documentation =
+            {
+                auto_show = true,
+                auto_show_delay_ms = 250,
+                treesitter_highlighting = true,
+            },
+            ghost_text = { enabled = true },
+        },
         sources =
         {
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
-            compat = { cmp_r = { name='cmp_r', module='blink.compat.source' }, },
+            -- default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r', 'env', 'nerdfont' },
+            default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r', 'nerdfont' },
+            providers =
+            {
+                cmp_r =
+                {
+                    name='cmp_r',
+                    module = 'blink.compat.source',
+                },
+                --env =
+                --{
+                --    name = 'env',
+                --    module = 'blink-cmp-env',
+                --},
+                nerdfont =
+                {
+                    name = 'nerdfont',
+                    module = 'blink-nerdfont',
+                    score_offset = 15,
+                    opts = { insert = true },
+                },
+            },
         },
+        fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, },
         keymap =
         {
-            preset = 'enter',
+            preset = 'default',
+            -- Select elements with Up, Down, Tab or Shift-Tab
+            ['<Up>'] = { 'select_prev', 'fallback' },
+            ['<Down>'] = { 'select_next', 'fallback' },
+            ['<Tab>'] = { 'select_next', 'fallback' },
+            ['<S-Tab>'] = { 'select_prev', 'fallback' },
+            -- Accept element with Return
+            ['<CR>'] = { 'accept', 'fallback' },
+            -- Show documentation with Ctrl-Space. Ctrl-b or f to move in long documentations
+            ['<C-Space>'] = { 'show_documentation', 'hide_documentation' },
+            ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+            ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+            -- Use Alt-1 to 0 to directly accept an element
             ['<A-1>'] = { function(cmp) cmp.accept({ index = 1 }) end },
             ['<A-2>'] = { function(cmp) cmp.accept({ index = 2 }) end },
             ['<A-3>'] = { function(cmp) cmp.accept({ index = 3 }) end },
@@ -219,47 +268,10 @@ return {
             ['<A-9>'] = { function(cmp) cmp.accept({ index = 9 }) end },
             ['<A-0>'] = { function(cmp) cmp.accept({ index = 10 }) end },
         },
-        appearance = { nerd_font_variant = 'mono' },
-        completion =
-        {
-            documentation = { auto_show = true },
-            menu =
-            {
-                draw =
-                {
-                    padding = {0, 1},
-                    columns = {{'item_idx'}, {'kind_icon'}, {'label'}, {'label_description', gap=1}},
-                    components =
-                    {
-                        kind_icon = { text = function(ctx) return ' '.. ctx.kind_icon .. ctx.icon_gap .. ' ' end },
-                        item_idx =
-                        {
-                            text = function(ctx) return ctx.idx==10 and '0' or ctx.idx>=10 and ' ' or tostring(ctx.idx) end,
-                            highlight='BlinkCmpItemIdx',
-                        }
-                    }
-                }
-            }
-        },
-        fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, }
+        signature = { enabled = true, window = { show_documentation = false }},
+        snippets = { preset = 'default' },
     },
-    opts_extend = { "sources.default" }
 },
-
---{'hrsh7th/nvim-cmp',
---        {'hrsh7th/cmp-nvim-lua', },
---        {'amarakon/nvim-cmp-lua-latex-symbols', },
---
---  { name = 'nvim_lua', priority = 75 },
---  { name = 'lua-latex-symbols', option = { cache = true }, priority= 70 },
---  { name = 'nvim_lsp_document_symbol', priority = 30 },
---            mapping =
---            {
---                ['<Tab>'] = cmp.mapping.select_next_item(),
---                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
---                ['<C-Space>'] = cmp.mapping.complete(),
---                ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false, }),
---            },
 
 ----------------------------------
 -- Misc.
