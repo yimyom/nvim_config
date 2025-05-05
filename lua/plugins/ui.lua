@@ -7,7 +7,6 @@
 -- more details. You should have received a copy of the GNU General Public License along with
 -- nvim_config. If not, see <https://www.gnu.org/licenses/>.
 
--- Plugins working automatically without invokation from the user
 return {
 
 ----------------------------------
