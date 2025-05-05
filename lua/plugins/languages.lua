@@ -110,25 +110,25 @@ return {
             },
             pyright =
             {
-                settings =
-                {
-                    pyright =
-                    {
-                        disableLanguageServices = false,
-                        disableOrganizeImports = false,
-                    },
-                    python =
-                    {
-                        analysis =
-                        {
-                            typeCheckingMode = 'strict', -- off, basic, strict
-                            diagnosticMode = 'workspace', -- openFilesOnly, workspace
-                            autoSearchPaths = true,
-                            useLibraryCodeForTypes = true,
-                            autoImportCompletions = true,
-                        }
-                    }
-                }
+--                settings =
+--                {
+--                    pyright =
+--                    {
+--                        disableLanguageServices = false,
+--                        disableOrganizeImports = false,
+--                    },
+--                    python =
+--                    {
+--                        analysis =
+--                        {
+--                            typeCheckingMode = 'strict', -- off, basic, strict
+--                            diagnosticMode = 'workspace', -- openFilesOnly, workspace
+--                            autoSearchPaths = true,
+--                            useLibraryCodeForTypes = true,
+--                            autoImportCompletions = true,
+--                        }
+--                    }
+--                }
             },
         },
     },
