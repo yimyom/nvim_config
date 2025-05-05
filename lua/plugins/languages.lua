@@ -22,7 +22,7 @@ return {
             'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
             'cpp','css','csv','cuda','desktop','diff','disassembly','dot','doxygen',
             'fortran','git_config','git_rebase','gitattributes','gitcommit','gitignore',
-            'haskell','html','idl','ini','javascript','json','latex','llvm','lua','luadoc',
+            'haskell','html','idl','ini','javascript','json','llvm','lua','luadoc',
             'make','markdown','markdown_inline','nasm','ninja','passwd','po','printf',
             'properties','proto','python','query','r','readline','regex','rnoweb','robots',
             'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim','vimdoc',
