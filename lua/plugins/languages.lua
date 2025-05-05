@@ -190,12 +190,11 @@ return {
 ----------------------------------
 -- Completion
 ----------------------------------
-{'saghen/blink.compat', },
 {'saghen/blink.cmp',
     event='InsertEnter',
     dependencies =
     {
-        --'bydlw98/blink-cmp-env',
+        'saghen/blink.compat',
         'MahanRahmati/blink-nerdfont.nvim',
         'onsails/lspkind.nvim',
         'R-nvim/cmp-r',
@@ -218,7 +217,6 @@ return {
         },
         sources =
         {
-            -- default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r', 'env', 'nerdfont' },
             default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r', 'nerdfont' },
             providers =
             {
@@ -227,11 +225,6 @@ return {
                     name='cmp_r',
                     module = 'blink.compat.source',
                 },
-                --env =
-                --{
-                --    name = 'env',
-                --    module = 'blink-cmp-env',
-                --},
                 nerdfont =
                 {
                     name = 'nerdfont',

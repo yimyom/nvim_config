@@ -26,23 +26,25 @@ return {
 --        },
 --    },
 --},
---
+
 --{'yetone/avante.nvim',
 --    event = 'VeryLazy',
 --    version = false,
 --    build = 'make',                         -- build from source
 --    opts =
 --    {
---        provider = 'openai',                  -- or 'deepseek', 'copilot', 'ollama', 'aihubmix'
---        openai = { model = 'gpt-4o', ... },
---    },
---    dependencies =
---    {
---        'stevearc/dressing.nvim',
---        'nvim-lua/plenary.nvim',
---        'MunifTanjim/nui.nvim',
---        'HakonHarnes/img-clip.nvim',         -- optional image pasting
---        'MeanderingProgrammer/render-markdown.nvim', -- optional markdown rendering
+--        provider = 'deepseek',                  -- or 'deepseek', 'copilot', 'ollama', 'aihubmix'
+--        vendors =
+--        {
+--            deepseek =
+--            {
+--                __inherited_from = 'openai',
+--                api_key_name = '',
+--                endpoint = 'https://api.deepseek.com',
+--                model = 'deepseek-coder',
+--                max_tokens = 8192,
+--            },
+--          },
 --    },
 --},
 

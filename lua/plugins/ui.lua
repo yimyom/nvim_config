@@ -10,20 +10,20 @@
 -- Plugins working automatically without invokation from the user
 return {
 
-{'echasnovski/mini.icons',
-    version = false
-},
+----------------------------------
+-- Libraries
+----------------------------------
+{'echasnovski/mini.icons', version = false },
 
-{'RishabhRD/popfix'
-},
+{'RishabhRD/popfix' },
 
-{'nvim-lua/plenary.nvim'
-},
+{'nvim-lua/plenary.nvim' },
 
--- --------------------------------
+{'MunifTanjim/nui.nvim' },
+
+----------------------------------
 -- Colorscheme
--- --------------------------------
-
+----------------------------------
 {'catppuccin/nvim',
     lazy = false,
     priority = 1000,

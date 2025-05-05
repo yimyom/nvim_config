@@ -18,7 +18,18 @@ return {
     opts =
     {
         dashboard = { enabled = true, },
-        indent = { enabled = true, },
+        indent =
+        {
+            enabled = true,
+            animate =
+            {
+                duration =
+                {
+                    step = 10,
+                    total = 250,
+                }
+            },
+        },
     },
 },
 
