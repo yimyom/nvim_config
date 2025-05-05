@@ -84,14 +84,14 @@ return {
 -- UI User Interface plugins
 -- --------------------------------
 
-{'lukas-reineke/indent-blankline.nvim', -- indent lines
-    event = {'BufReadPre', 'BufNewFile'},
-    main='ibl',
-    opts = {
-        indent = { char = "▏", },
-        scope = { enabled = true, },
-    }
-},
+-- {'lukas-reineke/indent-blankline.nvim', -- indent lines
+--     event = {'BufReadPre', 'BufNewFile'},
+--     main='ibl',
+--     opts = {
+--         indent = { char = "▏", },
+--         scope = { enabled = true, },
+--     }
+-- },
 
 {'nvim-lualine/lualine.nvim',
     lazy = false,
