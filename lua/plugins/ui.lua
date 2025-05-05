@@ -84,13 +84,36 @@ return {
 -- UI User Interface plugins
 -- --------------------------------
 
--- {'lukas-reineke/indent-blankline.nvim', -- indent lines
---     event = {'BufReadPre', 'BufNewFile'},
---     main='ibl',
---     opts = {
---         indent = { char = "▏", },
---         scope = { enabled = true, },
---     }
+{'lukas-reineke/indent-blankline.nvim', -- indent lines
+    event = {'BufReadPre', 'BufNewFile'},
+    main='ibl',
+    opts = {
+        indent = { char = "▏", },
+        scope = { enabled = true, },
+    }
+},
+
+-- snacks.vim is a large plugins with many smaller plugins inside
+-- {'folke/snacks.nvim',
+--     priority = 1000,
+--     lazy = false,
+--     ---@type snacks.Config
+--     opts =
+--     {
+--         dashboard = { enabled = true, },
+--         indent =
+--         {
+--             enabled = true,
+--             animate =
+--             {
+--                 duration =
+--                 {
+--                     step = 5,
+--                     total = 200,
+--                 }
+--             },
+--         },
+--     },
 -- },
 
 {'nvim-lualine/lualine.nvim',
