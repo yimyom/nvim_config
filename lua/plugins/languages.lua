@@ -87,40 +87,46 @@ return {
         {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>',
             noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
     },
-    opts = {
-        servers = {
-            clangd = {
-                cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'},
-            },
+    opts =
+    {
+        servers =
+        {
+            clangd = { cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'}, },
             r_language_server = { },
-            bashls = {
-                filetypes = {'zsh','bash','sh'},
-            },
+            bashls = { filetypes = {'zsh','bash','sh'}, },
             neocmake = {},
             jsonls = {},
             texlab = {},
-            lua_ls = {
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = {'vim'},
-                        },
-                        workspace = {
-                            library = vim.api.nvim_get_runtime_file('', true),
-                            checkThirdParty = false,
-                        },
+            lua_ls =
+            {
+                settings =
+                {
+                    Lua =
+                    {
+                        diagnostics = { globals = {'vim'}, },
+                        workspace = { library = vim.api.nvim_get_runtime_file('', true), checkThirdParty = false, },
                     },
                 },
             },
-            --pyright = {},
-            pylsp = {
-                plugins = {
-                    pycodestyle = {
-                        ignore = { 'E123', 'E127', 'E128', 'E201', 'E202', 'E203', 'E221', 'E222',
-                                    'E225', 'E226', 'E231', 'E251', 'E261', 'E262', 'E265', 'E301',
-                                    'E302', 'E305', 'E401', 'E402', 'E501', 'W191', 'W391',
-                        },
-                        maxLineLength = 100
+            pyright =
+            {
+                settings =
+                {
+                    pyright =
+                    {
+                        disableLanguageServices = false,
+                        disableOrganizeImports = false,
+                    },
+                    python =
+                    {
+                        analysis =
+                        {
+                            typeCheckingMode = 'strict', -- off, basic, strict
+                            diagnosticMode = 'workspace', -- openFilesOnly, workspace
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                            autoImportCompletions = true,
+                        }
                     }
                 }
             },
