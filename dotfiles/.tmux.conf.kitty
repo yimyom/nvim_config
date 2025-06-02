@@ -1,0 +1,36 @@
+# Kitty-specific configuration with native graphics protocol
+set -g default-terminal "xterm-kitty"
+set -as terminal-overrides ',xterm-kitty:RGB,sitm@,ritm@,Smulx=\E[4::%p1%dm\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m\E[59m,Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+
+# Graphics support
+set -g allow-passthrough on
+set -g extended-keys on
+
+# Modern features
+set -g mouse on
+set -g renumber-windows on
+set -g base-index 1
+set -g pane-base-index 1
+set -g set-clipboard on
+set -g focus-events on
+set -g default-shell "${SHELL}"
+
+# Unicode/Emoji support
+set -gq utf8
+set -g status-utf8 on
+set -gq allow-emoji on
+set -ag terminal-overrides ',xterm-kitty:U8C0'
+
+# Key bindings
+bind -n M-H previous-window
+bind -n M-L next-window
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
+
+# Theme (Catppuccin Mocha)
+set -g status-style bg="#1e1e2e",fg="#cdd6f4"
+set -g window-status-current-style fg="#cba6f7",bg="#313244"
+set -g pane-border-style fg="#6c7086"
+set -g pane-active-border-style fg="#cba6f7"

@@ -1,0 +1,32 @@
+# Ghostty configuration
+set -g default-terminal "xterm-ghostty"
+set -as terminal-overrides ',xterm-ghostty:RGB,Smulx@,Setulc@,Ms@'
+
+# Graphics and terminal features
+set -g sixel-support on
+set -g allow-passthrough on
+set -g focus-events on
+set -g terminal-features 'xterm-ghostty:clipboard'
+
+# Modern setup
+set -g mouse on
+set -g renumber-windows on
+set -g base-index 1
+set -g escape-time 0
+set -g default-shell "${SHELL}"
+
+# Unicode/Emoji optimization
+set -gq utf8
+set -gq status-utf8 on
+set -ag terminal-overrides ',xterm-ghostty:U8C1,combining-underline'
+
+# Efficient navigation
+bind -n M-PageUp copy-mode
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-selection
+
+# Dracula theme
+set -g status-style bg="#282a36",fg="#f8f8f2"
+set -g window-status-current-style fg="#ff79c6",bg="#44475a"
+set -g pane-border-style fg="#6272a4"
+set -g pane-active-border-style fg="#ff79c6"

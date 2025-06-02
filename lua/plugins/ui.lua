@@ -83,15 +83,6 @@ return {
 -- UI User Interface plugins
 -- --------------------------------
 
--- {'lukas-reineke/indent-blankline.nvim', -- indent lines
---     event = {'BufReadPre', 'BufNewFile'},
---     main='ibl',
---     opts = {
---         indent = { char = "▏", },
---         scope = { enabled = true, },
---     }
--- },
-
 -- snacks.vim is a large plugins with many smaller plugins inside
 {'folke/snacks.nvim',
     priority = 1000,
@@ -184,11 +175,13 @@ return {
 },
 
 {'j-morano/buffer_manager.nvim', -- buffer manager in a floating window
-    keys = {
+    keys =
+    {
         {'<leader>bl', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true, desc='Buffer manager'},
         {'<leader>bc', '<cmd>BufferClose<cr>', mode = 'n', noremap=true, silent=true, desc='Close buffer'},
     },
-    opts = {
+    opts =
+    {
         short_file_names = true,
         short_term_names = true
     },
