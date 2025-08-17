@@ -23,6 +23,18 @@ return {
 ----------------------------------
 -- Colorscheme
 ----------------------------------
+
+{
+    'zaldih/themery.nvim',
+    lazy = false,
+    config = function()
+        require('themery').setup({
+            themes = {'tokyonight', 'catppuccin', 'sonokai', 'everforest'},
+            livePreview = true,
+        })
+    end
+},
+
 {'catppuccin/nvim',
     lazy = false,
     priority = 1000,
@@ -53,31 +65,31 @@ return {
 	end,
 },
 
--- {'folke/tokyonight.nvim',
---     lazy = false,
---     priority = 1000,
--- 	config = function()
--- 		-- vim.cmd.colorscheme('tokyonight')
--- 	end,
--- },
--- 
--- {'sainnhe/sonokai',
---     lazy = false,
---     priority = 1000,
---     config = function()
---         vim.g.sonokai_enable_italic = true
--- 		-- vim.cmd.colorscheme('sonokai')
---     end
--- },
--- 
--- {'neanias/everforest-nvim',
--- 	version = false,
--- 	lazy = false,
--- 	priority = 1000,
--- 	config = function()
--- 		-- vim.cmd.colorscheme('everforest')
--- 	end,
--- },
+{'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+	config = function()
+		-- vim.cmd.colorscheme('tokyonight')
+	end,
+},
+
+{'sainnhe/sonokai',
+    lazy = false,
+    priority = 1000,
+    config = function()
+        vim.g.sonokai_enable_italic = true
+		-- vim.cmd.colorscheme('sonokai')
+    end
+},
+
+{'neanias/everforest-nvim',
+	version = false,
+	lazy = false,
+	priority = 1000,
+	config = function()
+		-- vim.cmd.colorscheme('everforest')
+	end,
+},
 
 -- --------------------------------
 -- UI User Interface plugins
