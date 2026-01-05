@@ -10,6 +10,21 @@
 return {
 
 ----------------------------------
+-- List of symbols
+----------------------------------
+{
+    'hedyhli/outline.nvim',
+    cmd = { "Outline", "OutlineOpen" },
+    event = {'LspAttach'},
+    keys =
+    {
+        {'<leader>lo', '<cmd>Outline<CR>', mode='n', noremap=true, silent=true, desc = 'List symbols'},
+    },
+    config = function(_, opts)
+        require('outline').setup(opts)
+    end,
+},
+----------------------------------
 -- Treesitter
 ----------------------------------
 {'nvim-treesitter/nvim-treesitter',
