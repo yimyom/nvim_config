@@ -48,6 +48,17 @@ return {
                     },
                 },
             },
+--            pylsp =
+--            {
+--                plugins =
+--                {
+--                    pycodestyle =
+--                    {
+--                        ignore = {'W391'},
+--                        maxLineLength = 100
+--                    }
+--                },
+--            },
             pyright =
             {
                 settings =
@@ -61,7 +72,7 @@ return {
                     {
                         analysis =
                         {
-                            typeCheckingMode = 'strict', -- off, basic, strict
+                            typeCheckingMode = 'basic', -- off, basic, strict
                             diagnosticMode = 'workspace', -- openFilesOnly, workspace
                             autoSearchPaths = true,
                             useLibraryCodeForTypes = true,
