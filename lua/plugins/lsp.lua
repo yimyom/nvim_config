@@ -74,12 +74,19 @@ return {
     },
 
     config = function(_, opts)
-        for server,cfg in pairs(opts.servers) do
-            cfg.capabilities = require('blink.cmp').get_lsp_capabilities(cfg.capabilities)
-            vim.lsp.config(server, cfg)
-            vim.lsp.enable(server)
+        -- Apply enhanced capabilities globally (blink.cmp does this automatically on 0.11+,
+        -- but calling it explicitly ensures it's ready early if needed)
+        vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities(), })
+
+        -- Override/extend specific server configs with my custom settings
+        for server, server_opts in pairs(opts.servers) do
+            vim.lsp.config(server, server_opts)
         end
-    end
+
+        -- Enable all the servers (they'll use nvim-lspconfig defaults + my overrides)
+        local servers_to_enable = vim.tbl_keys(opts.servers)
+        vim.lsp.enable(servers_to_enable)
+    end,
 },
 
 {'mason-org/mason.nvim',
