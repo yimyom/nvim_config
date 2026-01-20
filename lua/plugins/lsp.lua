@@ -12,8 +12,37 @@ return {
 ----------------------------------
 -- LSP
 ----------------------------------
+{'mason-org/mason.nvim',
+    cmd='Mason',
+    opts =
+    {
+        automatic_installation = true,
+        ui =
+        {
+            icons =
+            {
+                package_installed = '✓',
+                package_pending = '➜',
+                package_uninstalled = '✗'
+            }
+        },
+    }
+},
+
+{'mason-org/mason-lspconfig.nvim',
+    opts =
+    {
+        ensure_installed = {'air', 'bashls', 'neocmake', 'jsonls', 'emmylua_ls', 'basedpyright'},
+    },
+},
+
 {'neovim/nvim-lspconfig',   -- Configure and start language servers when appropriate
-    dependencies = {'saghen/blink.cmp' },
+    dependencies =
+    {
+        'saghen/blink.cmp',
+        'mason-org/mason-lspconfig.nvim',
+        'mason-org/mason.nvim',
+    },
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = 
     {
@@ -32,12 +61,7 @@ return {
         servers =
         {
             clangd = { cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'}, },
-            r_language_server = { },
-            bashls = { filetypes = {'zsh','bash','sh'}, },
-            neocmake = {},
-            jsonls = {},
-            texlab = {},
-            lua_ls =
+            emmylua_ls =
             {
                 settings =
                 {
@@ -48,18 +72,7 @@ return {
                     },
                 },
             },
---            pylsp =
---            {
---                plugins =
---                {
---                    pycodestyle =
---                    {
---                        ignore = {'W391'},
---                        maxLineLength = 100
---                    }
---                },
---            },
-            pyright =
+            basedpyright =
             {
                 settings =
                 {
@@ -95,25 +108,9 @@ return {
         end
 
         -- Enable all the servers (they'll use nvim-lspconfig defaults + my overrides)
-        local servers_to_enable = vim.tbl_keys(opts.servers)
-        vim.lsp.enable(servers_to_enable)
+        -- local servers_to_enable = vim.tbl_keys(opts.servers)
+        -- vim.lsp.enable(servers_to_enable)
     end,
 },
-
-{'mason-org/mason.nvim',
-    cmd = 'Mason',
-    opts =
-    {
-        ui =
-        {
-            icons =
-            {
-                package_installed = '✓',
-                package_pending = '➜',
-                package_uninstalled = '✗'
-            }
-        }
-    }
-}
 
 } -- end of return

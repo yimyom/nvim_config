@@ -43,6 +43,7 @@ return {
             'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim','vimdoc',
             'xml','yaml','zig'
         },
+        sync_install = false,
         auto_install = true,
         highlight =
         {
@@ -55,7 +56,7 @@ return {
         },
     },
     config = function(_, opts)
-        require('nvim-treesitter.configs').setup(opts)
+        require('nvim-treesitter.config').setup(opts)
     end,
 },
 
