@@ -32,7 +32,7 @@ return {
 {'mason-org/mason-lspconfig.nvim',
     opts =
     {
-        ensure_installed = {'air', 'bashls', 'neocmake', 'jsonls', 'emmylua_ls', 'basedpyright'},
+        ensure_installed = {'r_language_server', 'awk_ls', 'bashls', 'neocmake', 'jsonls', 'emmylua_ls', 'basedpyright'},
     },
 },
 
