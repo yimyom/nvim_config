@@ -25,4 +25,17 @@ require('config')
 require('terminal')
 
 -- Load plugins
-require('lazy').setup('plugins', { defaults = { lazy = true, }, })
+local lazy_opts = 
+{
+    spec = 'plugins', 
+    {
+        defaults = { lazy = true, }, 
+        checker =
+        {
+            enable = true,
+            notify = true,
+            frequency = 3600*24,
+        },
+    }
+}
+require('lazy').setup(lazy_opts, {})
