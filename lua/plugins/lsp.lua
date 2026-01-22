@@ -48,7 +48,6 @@ return {
         {'<leader>ls', vim.lsp.buf.signature_help, mode='n', noremap=true, silent=true, desc='Symbol signature help'},
         {'<leader>lt', vim.lsp.buf.type_definition, mode='n', noremap=true, silent=true, desc='Symbol type definition'},
         {'<leader>lr', vim.lsp.buf.rename, mode='n', noremap=true, silent=true, desc='Rename symbol'},
-        {'<leader>lf', vim.lsp.buf.formatting, mode='n', noremap=true, silent=true , desc='Format code'},
         {'<leader>le', '<cmd>ClangdTypeHierarchy<cr>', noremap=true, silent=true, desc='C++ type hierarchy (from clangd)'},
         {'<leader>ln', '<cmd>ClangdSymbolInfo<cr>', noremap=true, silent=true, desc='C++ symbol information (from clangd)'},
     },
