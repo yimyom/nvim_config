@@ -109,8 +109,8 @@ return {
         end
 
         -- Enable all the servers (they'll use nvim-lspconfig defaults + my overrides)
-        -- local servers_to_enable = vim.tbl_keys(opts.servers)
-        -- vim.lsp.enable(servers_to_enable)
+        local servers_to_enable = vim.tbl_keys(opts.servers)
+        vim.lsp.enable(servers_to_enable)
     end,
 },
 
