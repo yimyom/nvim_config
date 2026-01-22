@@ -30,10 +30,6 @@ return {
 },
 
 {'mason-org/mason-lspconfig.nvim',
-    opts =
-    {
-        ensure_installed = {'r_language_server', 'awk_ls', 'bashls', 'neocmake', 'jsonls', 'emmylua_ls', 'basedpyright'},
-    },
 },
 
 {'neovim/nvim-lspconfig',   -- Configure and start language servers when appropriate
@@ -60,6 +56,11 @@ return {
     {
         servers =
         {
+            r_language_server = {},
+            awk_ls = {},
+            bashls = {},
+            neocmake = {},
+            jsonls = {},
             clangd = { cmd = {'clangd', '--clang-tidy', '-j=5', '--malloc-trim', '--offset-encoding=utf-16'}, },
             emmylua_ls =
             {
@@ -72,7 +73,7 @@ return {
                     },
                 },
             },
-            basedpyright =
+            pyright =
             {
                 settings =
                 {

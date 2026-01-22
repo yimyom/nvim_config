@@ -56,7 +56,11 @@ return {
         },
     },
     config = function(_, opts)
-        require('nvim-treesitter.config').setup(opts)
+        local ok, treesitter = pcall(require, 'nvim-treesitter.config')
+        if not ok then
+            treesitter = pcall(require, 'nvim-treesitter.configs')
+        end
+        treesitter.setup(opts)
     end,
 },
 
