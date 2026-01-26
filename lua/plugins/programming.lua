@@ -24,6 +24,7 @@ return {
         require('outline').setup(opts)
     end,
 },
+
 ----------------------------------
 -- Treesitter
 ----------------------------------
@@ -97,8 +98,8 @@ return {
     event='InsertEnter',
     dependencies =
     {
+        'rafamadriz/friendly-snippets',
         'saghen/blink.compat',
-        'MahanRahmati/blink-nerdfont.nvim',
         'onsails/lspkind.nvim',
         'R-nvim/cmp-r',
     },
@@ -120,20 +121,13 @@ return {
         },
         sources =
         {
-            default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r', 'nerdfont' },
+            default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r'},
             providers =
             {
                 cmp_r =
                 {
                     name='cmp_r',
                     module = 'blink.compat.source',
-                },
-                nerdfont =
-                {
-                    name = 'nerdfont',
-                    module = 'blink-nerdfont',
-                    score_offset = 15,
-                    opts = { insert = true },
                 },
             },
         },
