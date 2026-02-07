@@ -50,26 +50,22 @@ Of course, you might want to put the git repository somewhere else. In that case
 |                          |   **\bc**    | Close buffer                                          |
 | Git                      |              |                                                       |
 |                          |   **\gb**    | Blame line                                            |
-|                          |   **\gn**    | Next git hunk                                         |
 |                          |   **\gd**    | Diff this with the previous head (HEAD~1)             |
-|                          |   **\gp**    | Previous git hunk                                     |
 |                          |   **\gf**    | Stage buffer                                          |
-|                          |   **\gs**    | Stage hunk under the cursor                           |
 |                          |   **\gi**    | Preview git hunk inline                               |
-|                          |   **\gv**    | Preview git hunk                                      |
 |                          |   **\gl**    | Open the quickfix window with git changes             |
-| Languages and LSP        |              |                                                       |
+|                          |   **\gn**    | Next git hunk                                         |
+|                          |   **\gp**    | Previous git hunk                                     |
+|                          |   **\gs**    | Stage hunk under the cursor                           |
+|                          |   **\gv**    | Preview git hunk                                      |
+| Programming              |              |                                                       |
+|                          |   **\lo**    | List symbols                                          |
 |                          |   **\ld**    | Jump to the definition of the symbol under the cursor |
-|                          |   **\ln**    | C++ symbol information (from clangd)                  |
-|                          |   **\le**    | C++ type hierarchy (from clangd)                      |
-|                          |   **\lr**    | Rename symbol                                         |
 |                          |   **\lh**    | Symbol help information                               |
-|                          |   **\ls**    | Symbol signature help                                 |
 |                          |   **\li**    | Symbol implementation                                 |
+|                          |   **\ls**    | Symbol signature help                                 |
 |                          |   **\lt**    | Symbol type definition                                |
-|                          |   **\lo**    | Display symbol outline                                |
-| Code actions             |   **\ca**    | Code actions at the cursor's position                 |
-|                          |   **\cr**    | Code actions at the selected range                    |
+|                          |   **\lr**    | Rename symbol                                         |
   
 # About the plugins
 
@@ -79,12 +75,10 @@ Of course, you might want to put the git repository somewhere else. In that case
 - [sonokai](https://github.com/sainnhe/sonokai)
 - [everforest](https://github.com/neanias/everforest-nvim)
 
-To change the default colorscheme, go to the file `lua/plugins/ui.lua`, search for lines containing `vim.cmd.colorscheme` and uncomment the one you want to use by default. Make sure all the other lines containing the same string and commented out.
+To change the default colorscheme, use the command `:Themery` to open a dialog box with all the available color sschemes.
 
 # Languages support
-## LSP
-## Extra configuration's files
-### R Language
+## R Language
 In the `dotfiles` directory, there is a file called `.lintr` which need to be placed
 in your home directory. It contains extra configuration for the R linter to avoid having too many messages on the screen. Depending on your preferences you might want to change this file.
 
@@ -95,5 +89,10 @@ Let's assume the git repository is in `${HOME}/nvim_config`:
 ```bash
 ln -s ${HOME}/nvim_config/dotfiles/.lintr ${HOME}
 ```
-
 Next, to have a more advanced configuration, refer to the [`lintr` documentation](https://cran.r-project.org/web/packages/lintr/vignettes/lintr.html).
+
+## C++
+`Clangd` is the default Language server.
+
+## Python
+

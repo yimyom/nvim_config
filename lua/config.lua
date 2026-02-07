@@ -66,10 +66,6 @@ vim.diagnostic.config(
             source = 'if_many',
             prefix = '●',
         },
-        virtual_lines = 
-        {
-            current_line = true,
-        },
 })
 
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { ctermfg = 1, fg = '#ff0000', italic = true })
