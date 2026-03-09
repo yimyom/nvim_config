@@ -13,8 +13,7 @@ config.window_padding =
     left = '0.25cell',
     right = '0.25cell',
     top = '0.25cell',
-    --bottom = '0.5cell',
-    bottom = '1cell',
+    bottom = '1.3cell',
 }
 
 config.adjust_window_size_when_changing_font_size = false
