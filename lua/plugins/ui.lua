@@ -10,29 +10,8 @@
 return {
 
 ----------------------------------
--- Libraries
-----------------------------------
-{'echasnovski/mini.icons', version = false},
-
-{'RishabhRD/popfix'},
-
-{'nvim-lua/plenary.nvim'},
-
-{'MunifTanjim/nui.nvim'},
-
-----------------------------------
 -- Colorscheme
 ----------------------------------
-
-{'zaldih/themery.nvim',
-    lazy = false,
-    config = function()
-        require('themery').setup({
-            themes = {'tokyonight', 'catppuccin', 'sonokai', 'everforest'},
-            livePreview = true,
-        })
-    end
-},
 
 {'catppuccin/nvim',
     lazy = false,
@@ -94,7 +73,7 @@ return {
 -- UI User Interface plugins
 -- --------------------------------
 
--- snacks.vim is a large plugins with many smaller plugins inside
+-- snacks.vim is a large plugin with many smaller plugins inside
 {'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
@@ -107,6 +86,23 @@ return {
             enabled = true,
             animate = { enabled = false, },
         },
+        explorer = { enabled = true },
+        picker = { enabled = true },
+        input = { enabled = true },
+        toggle = { },
+    },
+    keys =
+    {
+        -- u for Utilities
+        { '<leader>uf', function() Snacks.explorer() end, mode='n', noremap=true, silent=true, desc='File manager' },
+        { '<leader>uc', function() Snacks.picker.colorschemes() end, mode='n', noremap=true, silent=true, desc='Color schemes' },
+        { '<leader>um', function() Snacks.picker.man() end, mode='n', noremap=true, silent=true, desc='Man pages' },
+        -- b for Buffers
+        { '<leader>bl', function() Snacks.picker.buffers() end, mode = 'n', noremap=true, silent=true, desc='List buffers'},
+        { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
+        -- g for Git
+        { '<leader>gt', function() Snacks.picker.git_status() end, desc = 'Git status' },
+        { '<leader>gD', function() Snacks.picker.git_diff() end, desc = 'Git diff' },
     },
 },
 
@@ -185,19 +181,6 @@ return {
 --     end,
 -- },
 
-{'j-morano/buffer_manager.nvim', -- buffer manager in a floating window
-    keys =
-    {
-        {'<leader>bl', '<cmd>lua require("buffer_manager.ui").toggle_quick_menu()<cr>', mode = 'n', noremap=true, silent=true, desc='Buffer manager'},
-        {'<leader>bc', '<cmd>BufferClose<cr>', mode = 'n', noremap=true, silent=true, desc='Close buffer'},
-    },
-    opts =
-    {
-        short_file_names = true,
-        short_term_names = true
-    },
-},
-
 {'folke/which-key.nvim', -- preview complex key mapping
     event = 'VeryLazy',
     opts =
@@ -207,8 +190,6 @@ return {
             { lhs = '<leader>b', group = 'Buffers', desc = 'Buffers' },
             { lhs = '<leader>l', group = 'LSP and languages', desc = 'LSP and languages' },
             { lhs = '<leader>g', group = 'Git', desc = 'Git' },
-            { lhs = '<leader>t', group = 'Trouble and diagnostics', desc = 'Trouble and diagnostics' },
-            { lhs = '<leader>c', group = 'Code actions', desc = 'Code actions' },
         }
     },
     init = function()

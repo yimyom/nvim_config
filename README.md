@@ -44,11 +44,16 @@ Of course, you might want to put the git repository somewhere else. In that case
 
 |  Category                |  Keys        |  Description                                          |
 |:-------------------------|:------------:|:------------------------------------------------------|
-| Utils                    |              |                                                       |
-|                          |   **\f**     | File manager                                          |
+| Utilities                |              |                                                       |
+|                          |   **\uf**    | File manager                                          |
+|                          |   **\uc**    | Color scheme chooser                                  |
+|                          |   **\um**    | Unix man pages browser                                |
+| Buffers                  |              |                                                       |
 |                          |   **\bl**    | Buffer manager                                        |
-|                          |   **\bc**    | Close buffer                                          |
+|                          |   **\bd**    | Delete buffer                                         |
 | Git                      |              |                                                       |
+|                          |   **\gt**    | Git status                                            |
+|                          |   **\gD**    | Git diff                                              |
 |                          |   **\gb**    | Blame line                                            |
 |                          |   **\gd**    | Diff this with the previous head (HEAD~1)             |
 |                          |   **\gf**    | Stage buffer                                          |
@@ -56,8 +61,8 @@ Of course, you might want to put the git repository somewhere else. In that case
 |                          |   **\gl**    | Open the quickfix window with git changes             |
 |                          |   **\gn**    | Next git hunk                                         |
 |                          |   **\gp**    | Previous git hunk                                     |
-|                          |   **\gs**    | Stage hunk under the cursor                           |
 |                          |   **\gv**    | Preview git hunk                                      |
+|                          |   **\gs**    | Stage hunk under the cursor                           |
 | Programming              |              |                                                       |
 |                          |   **\lo**    | List symbols                                          |
 |                          |   **\ld**    | Jump to the definition of the symbol under the cursor |
@@ -92,7 +97,7 @@ ln -s ${HOME}/nvim_config/dotfiles/.lintr ${HOME}
 Next, to have a more advanced configuration, refer to the [`lintr` documentation](https://cran.r-project.org/web/packages/lintr/vignettes/lintr.html).
 
 ## C++
-`Clangd` is the default Language server.
+`clangd` is the default Language server.
 
 ## Python
-
+`pyright` is the default Language server.
