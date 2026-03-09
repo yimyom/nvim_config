@@ -12,26 +12,26 @@ local config_path = vim.fn.stdpath('data') .. '/codecompanion_api_keys.lua'
 
 local supported_engines =
 {
-    { name = 'Anthropic',	    adapter = 'anthropic',    needs_key=true,  needs_url = false },
-	{ name = 'Augment Code',	adapter = 'auggie_cli',   needs_key=true,  needs_url = false },
-    { name = 'Cagent',	        adapter = 'cagent',       needs_key=false, needs_url = false },
-	{ name = 'Claude Code',	    adapter = 'claude_code',  needs_key=true,  needs_url = false },
-	{ name = 'Codex',	        adapter = 'codex',        needs_key=true,  needs_url = false },
-	{ name = 'Copilot',	        adapter = 'copilot',      needs_key=true,  needs_url = false },
-	{ name = 'Gemini CLI',	    adapter = 'gemini_cli',   needs_key=true,  needs_url = false },
-	{ name = 'GitHub Models',   adapter = 'githubmodels', needs_key=false, needs_url = false },
-	{ name = 'Goose',	        adapter = 'goose',        needs_key=true,  needs_url = false },
-	{ name = 'DeepSeek',	    adapter = 'deepseek',     needs_key=true,  needs_url = false },
-	{ name = 'Gemini',	        adapter = 'gemini',       needs_key=true,  needs_url = false },
-	{ name = 'HuggingFace',	    adapter = 'huggingface',  needs_key=true,  needs_url = false },
-	{ name = 'Kimi CLI',	    adapter = 'kimi_cli',     needs_key=true,  needs_url = false },
-	{ name = 'Mistral AI',	    adapter = 'mistral',      needs_key=true,  needs_url = false },
-	{ name = 'Novita',	        adapter = 'novita',       needs_key=true,  needs_url = false },
-	{ name = 'Ollama',	        adapter = 'ollama',       needs_key=false, needs_url = true  },
-	{ name = 'OpenAI',	        adapter = 'openai',       needs_key=true,  needs_url = false },
-	{ name = 'opencode',	    adapter = 'opencode',     needs_key=true,  needs_url = false },
-	{ name = 'xAI',	            adapter = 'xai',          needs_key=true,  needs_url = false },
-    { name = 'Do not install LLM engine', adapter = 'no_install',   needs_key=false, needs_url = false },
+    { name = 'Anthropic',	    adapter = 'anthropic', },
+	{ name = 'Augment Code',	adapter = 'auggie_cli', },
+    { name = 'Cagent',	        adapter = 'cagent', },
+	{ name = 'Claude Code',	    adapter = 'claude_code', },
+	{ name = 'Codex',	        adapter = 'codex', },
+	{ name = 'Copilot',	        adapter = 'copilot', },
+	{ name = 'Gemini CLI',	    adapter = 'gemini_cli', },
+	{ name = 'GitHub Models',   adapter = 'githubmodels', },
+	{ name = 'Goose',	        adapter = 'goose', },
+	{ name = 'DeepSeek',	    adapter = 'deepseek', },
+	{ name = 'Gemini',	        adapter = 'gemini', },
+	{ name = 'HuggingFace',	    adapter = 'huggingface', },
+	{ name = 'Kimi CLI',	    adapter = 'kimi_cli', },
+	{ name = 'Mistral AI',	    adapter = 'mistral', },
+	{ name = 'Novita',	        adapter = 'novita', },
+	{ name = 'Ollama',	        adapter = 'ollama', },
+	{ name = 'OpenAI',	        adapter = 'openai', },
+	{ name = 'opencode',	    adapter = 'opencode', },
+	{ name = 'xAI',	            adapter = 'xai', },
+    { name = 'Do not install an LLM engine', adapter = 'no_install', },
 }
 
 local function check_for_existing_config()
@@ -58,7 +58,7 @@ local function check_for_existing_config()
 end
    
 local function make_codecompanion_cfg(engine)
-    local opts =
+    return
     {
         interactions =
         {
@@ -73,23 +73,8 @@ local function make_codecompanion_cfg(engine)
             inline = { adapter = engine.adapter },
             agent = { adapter = engine.adapter },
         },
-        adapters =
-        {
-            http = {}
-        },
-        opts = { log_level = 'ERROR', },
+        opts = { log_level = 'DEBUG', },
     }
-    opts.adapters.http[engine.adapter] = function()
-        return require('codecompanion.adapters').extend(engine.adapter,
-        {
-            env =
-            {
-                api_key = engine.api_key,
-            },
-        })
-    end
-
-    return opts
 end
 
 -- Save the engine configuration into a small lua file
@@ -103,43 +88,6 @@ local function save_table(filename, tbl)
         end
         file:write('}\n')
         file:close()
-    end
-end
-
-local function save_and_configure(choice)
-    -- After all inputs are collected, save and setup
-    save_table(config_path, choice)
-    require('codecompanion').setup(make_codecompanion_cfg(choice))
-end
- 
-local function engine_choice(choice,_)
-    if choice then
-        if choice.needs_key and choice.needs_url then
-            vim.ui.input({ prompt = 'Enter ' .. choice.name .. ' API key:' }, function(key)
-                if not key then return end
-                choice.api_key = key
-                vim.ui.input({ prompt = 'Enter ' .. choice.name .. ' URL:' }, function(url)
-                    if not url then return end
-                    choice.url = url
-                    save_and_configure(choice)
-                end)
-            end)
-        elseif choice.needs_key then
-            vim.ui.input({ prompt = 'Enter ' .. choice.name .. ' API key:' }, function(key)
-                if not key then return end
-                choice.api_key = key
-                save_and_configure(choice)
-            end)
-        elseif choice.needs_url then
-            vim.ui.input({ prompt = 'Enter ' .. choice.name .. ' URL:' }, function(url)
-                if not url then return end
-                choice.url = url
-                save_and_configure(choice)
-            end)
-        else
-            -- No extra input needed
-            save_and_configure(choice)
-        end
     end
 end
 
@@ -165,21 +113,28 @@ return {
     config =
         function(_, _opts)
             local engine = check_for_existing_config()
-             -- engine was nil, ask the user
-            if not engine then
-                vim.ui.select(supported_engines, 
-                                {
-                                    prompt = 'Choose an LLM engine:',
-                                    format_item = function(item) return item.name end,
-                                },
-                                engine_choice
-                            )
+            if not engine then -- engine was nil, ask the user
+                vim.ui.select(
+                    supported_engines, 
+                    {
+                        prompt = 'Choose an LLM engine:',
+                        format_item = function(item) return item.name end,
+                    },
+                    function(choice,_)
+                        if choice then
+                            save_table(config_path, choice)
+                            local opts = make_codecompanion_cfg(choice)
+                            require('codecompanion').setup(opts)
+                        end
+                    end
+                )
             else
                 if engine.adapter ~= 'no_install' then
-                    require('codecompanion').setup(make_codecompanion_cfg(engine))
+                    local opts = make_codecompanion_cfg(engine)
+                    require('codecompanion').setup(opts)
                 end
             end
-        end
+        end,
 }
 
 } -- end of return
