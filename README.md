@@ -101,3 +101,9 @@ Next, to have a more advanced configuration, refer to the [`lintr` documentation
 
 ## Python
 `pyright` is the default Language server.
+
+## Large Language Models
+`CodeCompanion` is used to interact with LLM. When you call any `CodeCompanion` command for the first time, a dialog box will open to ask which engine to use (exple: Grok, Deepseek, Claude, etc...).
+You must define an environment variable with the API key to use it. For example for DeepSeek, you must define the environment variable DEEPSEEK_API_KEY.
+Most of the API keys will look like `*_API_KEY` where `*` is the name of the LLM provider. Examples are: ANTHROPIC, DEEPSEEK, OPENAI, etc...
+Read the docuementation of [CodeCompanion](https://codecompanion.olimorris.dev/getting-started) for more details.
