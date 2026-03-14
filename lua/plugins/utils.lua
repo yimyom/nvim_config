@@ -24,17 +24,6 @@ return {
     lazy = false,
 },
 
-{'nvim-tree/nvim-tree.lua',
-    cmd = 'NvimTreeToggle',
-    opts =
-    {
-    },
-    keys =
-    {
-        { '<leader>f', '<cmd>NvimTreeToggle<cr>', mode='n', noremap=true, silent=true, desc='File manager' }
-    },
-},
-
 {'lewis6991/gitsigns.nvim', -- Git signs in the vi gutter (+ on status line)
     event = {'BufReadPre','BufNewFile'},
     opts =
