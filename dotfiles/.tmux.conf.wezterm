@@ -5,6 +5,7 @@ set -as terminal-overrides ',wezterm:RGB,Smulx=\E[4::%p1%dm,Setulc=\E[58::2::%p1
 # Graphics support
 set -g sixel-support on
 set -g allow-passthrough on
+#set -g extended-keys on
 
 # Modern features
 set -g mouse on

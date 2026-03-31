@@ -3,6 +3,7 @@ set -g default-terminal "xterm-kitty"
 set -as terminal-overrides ',xterm-kitty:RGB,sitm@,ritm@,Smulx=\E[4::%p1%dm\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m\E[59m,Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
 # Graphics support
+#set -g sixel-support on
 set -g allow-passthrough on
 set -g extended-keys on
 
