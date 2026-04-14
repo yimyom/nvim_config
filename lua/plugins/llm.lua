@@ -10,27 +10,20 @@
 -- CodeCompanion configuration --
 local config_path = vim.fn.stdpath('data') .. '/codecompanion_api_keys.lua'
 
-local supported_engines =
+local http_adapters =
 {
-    { name = 'Anthropic',	    adapter = 'anthropic', },
-	{ name = 'Augment Code',	adapter = 'auggie_cli', },
-    { name = 'Cagent',	        adapter = 'cagent', },
-	{ name = 'Claude Code',	    adapter = 'claude_code', },
-	{ name = 'Codex',	        adapter = 'codex', },
-	{ name = 'Copilot',	        adapter = 'copilot', },
-	{ name = 'Gemini CLI',	    adapter = 'gemini_cli', },
-	{ name = 'GitHub Models',   adapter = 'githubmodels', },
-	{ name = 'Goose',	        adapter = 'goose', },
-	{ name = 'DeepSeek',	    adapter = 'deepseek', },
-	{ name = 'Gemini',	        adapter = 'gemini', },
-	{ name = 'HuggingFace',	    adapter = 'huggingface', },
-	{ name = 'Kimi CLI',	    adapter = 'kimi_cli', },
-	{ name = 'Mistral AI',	    adapter = 'mistral', },
-	{ name = 'Novita',	        adapter = 'novita', },
-	{ name = 'Ollama',	        adapter = 'ollama', },
-	{ name = 'OpenAI',	        adapter = 'openai', },
-	{ name = 'opencode',	    adapter = 'opencode', },
-	{ name = 'xAI',	            adapter = 'xai', },
+    { name = 'Anthropic',         adapter = 'anthropic', },
+    { name = 'Cagent',            adapter = 'cagent', },
+    { name = 'Copilot',           adapter = 'copilot', },
+    { name = 'GitHub Models',     adapter = 'githubmodels', },
+    { name = 'DeepSeek',          adapter = 'deepseek', },
+    { name = 'Gemini',            adapter = 'gemini', },
+    { name = 'HuggingFace',       adapter = 'huggingface', },
+    { name = 'Mistral AI',        adapter = 'mistral', },
+    { name = 'Novita',            adapter = 'novita', },
+    { name = 'Ollama',            adapter = 'ollama', },
+    { name = 'OpenAI',            adapter = 'openai', },
+    { name = 'xAI',               adapter = 'xai', },
     { name = 'Do not install an LLM engine', adapter = 'no_install', },
 }
 
@@ -56,22 +49,14 @@ local function check_for_existing_config()
 
     return engine
 end
-   
+
 local function make_codecompanion_cfg(engine)
-    return
-    {
-        interactions =
-        {
+    return {
+        interactions = {
             chat = { adapter = engine.adapter, },
             inline = { adapter = engine.adapter, },
             cmd = { adapter = engine.adapter, },
             background = { adapter = engine.adapter, },
-        },
-        strategies =
-        {
-            chat = { adapter = engine.adapter },
-            inline = { adapter = engine.adapter },
-            agent = { adapter = engine.adapter },
         },
         opts = { log_level = 'DEBUG', },
     }
@@ -115,7 +100,7 @@ return {
             local engine = check_for_existing_config()
             if not engine then -- engine was nil, ask the user
                 vim.ui.select(
-                    supported_engines, 
+                    http_adapters, 
                     {
                         prompt = 'Choose an LLM engine:',
                         format_item = function(item) return item.name end,
