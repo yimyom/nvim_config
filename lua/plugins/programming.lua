@@ -41,7 +41,7 @@ return {
             'haskell','html','idl','ini','javascript','json','llvm','lua','luadoc',
             'make','markdown','markdown_inline','nasm','ninja','passwd','po','printf',
             'properties','proto','python','query','r','readline','regex','rnoweb','robots',
-            'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim','vimdoc',
+            'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim',
             'xml','yaml','zig'
         },
         sync_install = false,
