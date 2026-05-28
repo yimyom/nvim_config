@@ -31,19 +31,25 @@ return {
     branch = 'main',
     lazy = false,
     build = ':TSUpdate',
-    config = function()
+    init = function()
         local ts = require('nvim-treesitter')
         local langs = { 'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
                 'cpp','css','csv','cuda','desktop','diff','disassembly','dot','doxygen',
                 'git_config','git_rebase','gitattributes','gitcommit','gitignore',
                 'haskell','html','idl','ini','javascript','json','lua','luadoc',
                 'make','markdown','markdown_inline','ninja','passwd','po','printf',
-                'properties','proto','python','query','r','readline','regex','robots',
+                'properties','proto','python','query','r','readline','regex',
                 'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim',
                 'xml','yaml'}
+        local installed = ts.get_installed()
+        local missing = vim.iter(langs)
+            :filter(function(p) return not vim.tbl_contains(installed, p) end)
+            :totable()
 
-        ts.setup({ensure_installed = langs})
-        
+        if #missing > 0 then
+            ts.install(missing)
+        end
+
         local group = vim.api.nvim_create_augroup('TreesitterGroup', {clear = true})
         vim.api.nvim_create_autocmd('FileType',
         {
@@ -95,16 +101,14 @@ return {
     event='InsertEnter',
     dependencies =
     {
-        -- 'saghen/blink.lib', when version 0.12 arrives in Debian
+        'saghen/blink.lib',
         'saghen/blink.compat',
         'onsails/lspkind.nvim',
         'R-nvim/cmp-r',
     },
-    branch = 'v1',
-    -- when version 0.12 arrives in Debian
-    --build = function()
-    --    require('blink.cmp').build():wait(60000)
-    --end,
+    build = function()
+        require('blink.cmp').build():wait(60000)
+    end,
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -134,8 +138,7 @@ return {
                 },
             },
         },
-        -- fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, },
-        fuzzy = { implementation = 'prefer_rust_with_warning' },
+        fuzzy = { implementation = 'rust' },
         keymap =
         {
             preset = 'default',
