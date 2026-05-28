@@ -17,6 +17,7 @@ local http_adapters =
     { name = 'Copilot',           adapter = 'copilot', },
     { name = 'GitHub Models',     adapter = 'githubmodels', },
     { name = 'DeepSeek',          adapter = 'deepseek', },
+    { name = 'DeepSeek Pro',      adapter = 'deepseek-pro', },
     { name = 'Gemini',            adapter = 'gemini', },
     { name = 'HuggingFace',       adapter = 'huggingface', },
     { name = 'Mistral AI',        adapter = 'mistral', },

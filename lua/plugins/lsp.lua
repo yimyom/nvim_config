@@ -35,7 +35,6 @@ return {
 {'neovim/nvim-lspconfig',   -- Configure and start language servers when appropriate
     dependencies =
     {
-        'saghen/blink.cmp',
         'mason-org/mason-lspconfig.nvim',
         'mason-org/mason.nvim',
     },

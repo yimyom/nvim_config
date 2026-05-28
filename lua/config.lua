@@ -37,16 +37,12 @@ vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTre
 vim.opt.winborder = 'rounded'
 
 ----------------------------------
--- Folding
+-- Tabs
 ----------------------------------
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod='expr'
-vim.opt.foldexpr='nvim_treesitter#foldexpr()'
-vim.opt.foldtext= [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 
 ----------------------------------
 -- Indentations

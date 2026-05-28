@@ -12,8 +12,7 @@ return {
 ----------------------------------
 -- List of symbols
 ----------------------------------
-{
-    'hedyhli/outline.nvim',
+{'hedyhli/outline.nvim',
     cmd = { "Outline", "OutlineOpen" },
     event = {'LspAttach'},
     keys =
@@ -29,39 +28,37 @@ return {
 -- Treesitter
 ----------------------------------
 {'nvim-treesitter/nvim-treesitter',
-    event = {'BufReadPost', 'BufNewFile'},
-    run = ':TSUpdate',
-    opts =
-    {
-        ensure_installed =
+    branch = 'main',
+    lazy = false,
+    build = ':TSUpdate',
+    config = function()
+        local ts = require('nvim-treesitter')
+        local langs = { 'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
+                'cpp','css','csv','cuda','desktop','diff','disassembly','dot','doxygen',
+                'git_config','git_rebase','gitattributes','gitcommit','gitignore',
+                'haskell','html','idl','ini','javascript','json','lua','luadoc',
+                'make','markdown','markdown_inline','ninja','passwd','po','printf',
+                'properties','proto','python','query','r','readline','regex','robots',
+                'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim',
+                'xml','yaml'}
+
+        ts.setup({ensure_installed = langs})
+        
+        local group = vim.api.nvim_create_augroup('TreesitterGroup', {clear = true})
+        vim.api.nvim_create_autocmd('FileType',
         {
-            'arduino','asm','awk','bash','bibtex','c','cmake','comment','commonlisp',
-            'cpp','css','csv','cuda','desktop','diff','disassembly','dot','doxygen',
-            'fortran','git_config','git_rebase','gitattributes','gitcommit','gitignore',
-            'haskell','html','idl','ini','javascript','json','llvm','lua','luadoc',
-            'make','markdown','markdown_inline','nasm','ninja','passwd','po','printf',
-            'properties','proto','python','query','r','readline','regex','rnoweb','robots',
-            'rust','scheme','sql','ssh_config','strace','tmux','todotxt','udev','vim',
-            'xml','yaml','zig'
-        },
-        sync_install = false,
-        auto_install = true,
-        highlight =
-        {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-        },
-        indent =
-        {
-            enable = false,
-        },
-    },
-    config = function(_, opts)
-        local ok, treesitter = pcall(require, 'nvim-treesitter.config')
-        if not ok then
-            treesitter = pcall(require, 'nvim-treesitter.configs')
-        end
-        treesitter.setup(opts)
+            group = group,
+            pattern = langs,
+            callback = function(args)
+                local buf = args.buf
+                vim.treesitter.start(buf)
+                vim.bo[buf].indentexpr = "v:lua.requite'nvim-treesitter'.indentexpr()"
+                vim.opt_local.foldmethod = 'expr'
+                vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                vim.opt_local.foldlevel = 99
+                vim.opt_local.foldtext= [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+            end,
+        })
     end,
 },
 
@@ -98,11 +95,17 @@ return {
     event='InsertEnter',
     dependencies =
     {
-        'rafamadriz/friendly-snippets',
+        -- 'saghen/blink.lib', when version 0.12 arrives in Debian
         'saghen/blink.compat',
         'onsails/lspkind.nvim',
         'R-nvim/cmp-r',
     },
+    branch = 'v1',
+    -- when version 0.12 arrives in Debian
+    --build = function()
+    --    require('blink.cmp').build():wait(60000)
+    --end,
+
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts =
@@ -121,7 +124,7 @@ return {
         },
         sources =
         {
-            default = { 'lsp', 'path', 'snippets', 'buffer', 'cmp_r'},
+            default = {'lsp', 'buffer', 'path', 'cmp_r'},
             providers =
             {
                 cmp_r =
@@ -131,7 +134,8 @@ return {
                 },
             },
         },
-        fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, },
+        -- fuzzy = { implementation = 'lua', sorts = {'exact','score','sort_text'}, },
+        fuzzy = { implementation = 'prefer_rust_with_warning' },
         keymap =
         {
             preset = 'default',
