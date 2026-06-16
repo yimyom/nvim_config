@@ -13,15 +13,11 @@ local config_path = vim.fn.stdpath('data') .. '/codecompanion_api_keys.lua'
 local http_adapters =
 {
     { name = 'Anthropic',         adapter = 'anthropic', },
-    { name = 'Cagent',            adapter = 'cagent', },
     { name = 'Copilot',           adapter = 'copilot', },
-    { name = 'GitHub Models',     adapter = 'githubmodels', },
     { name = 'DeepSeek',          adapter = 'deepseek', },
-    { name = 'DeepSeek Pro',      adapter = 'deepseek-pro', },
     { name = 'Gemini',            adapter = 'gemini', },
     { name = 'HuggingFace',       adapter = 'huggingface', },
     { name = 'Mistral AI',        adapter = 'mistral', },
-    { name = 'Novita',            adapter = 'novita', },
     { name = 'Ollama',            adapter = 'ollama', },
     { name = 'OpenAI',            adapter = 'openai', },
     { name = 'xAI',               adapter = 'xai', },
