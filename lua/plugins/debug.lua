@@ -10,58 +10,53 @@
 return {
 
 {'mfussenegger/nvim-dap',
-    lazy = false,
+    lazy = true,
     dependencies =
     {
+      'rcarriga/nvim-dap-ui',
+      'theHamsta/nvim-dap-virtual-text',
+      'jay-babu/mason-nvim-dap.nvim',
     },
-    config = function()
-        local dap = require('dap')
-        dap.adapters.gdb =
+    opts =
+    {
+        signs =
         {
-            type = 'executable',
-            command = 'gdb',
-            args = {"--interpreter=dap", "--eval-command", "set print pretty on"}
-        }
+            breakpoint = { text = '🟡' },
+            breakpoint_condition = { text = '🔴' },
+            logpoint = { text = '📝' },
+            stopped = { text = '▶️' },
+        },
+    },
+},
 
-        dap.configurations.c =
-        {
-            {
-                name = "Launch",
-                type = "gdb",
-                request = "launch",
-                program = function()
-                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end,
-                cwd = "${workspaceFolder}",
-                stopAtBeginningOfMainSubprogram = false,
-            },
-            {
-                name = "Select and attach to process",
-                type = "gdb",
-                request = "attach",
-                program = function()
-                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end,
-                pid = function()
-                    local name = vim.fn.input('Executable name (filter): ')
-                    return require("dap.utils").pick_process({ filter = name })
-                end,
-                cwd = '${workspaceFolder}'
-            },
-            {
-                name = 'Attach to gdbserver :1234',
-                type = 'gdb',
-                request = 'attach',
-                target = 'localhost:1234',
-                program = function()
-                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end,
-                cwd = '${workspaceFolder}'
-            },
-        }
+{'rcarriga/nvim-dap-ui',
+},
 
-        dap.configurations.cpp = dap.configurations.c
-    end,
+{'theHamsta/nvim-dap-virtual-text',
+},
+
+{'jay-babu/mason-nvim-dap.nvim',
+    dependencies = 'mason.nvim',
+    cmd = { 'DapInstall', 'DapUninstall' },
+    opts =
+    {
+        -- Makes a best effort to setup the various debuggers with
+        -- reasonable debug configurations
+        automatic_installation = true,
+
+    -- You can provide additional configuration to the handlers,
+    -- see mason-nvim-dap README for more information
+    handlers = {},
+
+    -- You'll need to check that you have the required things installed
+    -- online, please don't ask me how to install them :)
+    ensure_installed =
+    {
+        -- Update this to ensure that you have the debuggers for the langs you want
+    },
+    },
+    -- mason-nvim-dap is loaded when nvim-dap loads
+    config = function() end,
 },
 
 }
