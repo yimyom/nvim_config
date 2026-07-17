@@ -37,6 +37,7 @@ return {
     {
         'mason-org/mason-lspconfig.nvim',
         'mason-org/mason.nvim',
+        'saghen/blink.cmp',
     },
     event = {'BufReadPre', 'BufNewFile', 'LspAttach'},
     keys = 

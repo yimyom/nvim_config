@@ -98,11 +98,28 @@ return {
         { '<leader>uc', function() Snacks.picker.colorschemes() end, mode='n', noremap=true, silent=true, desc='Color schemes' },
         { '<leader>um', function() Snacks.picker.man() end, mode='n', noremap=true, silent=true, desc='Man pages' },
         -- b for Buffers
-        { '<leader>bl', function() Snacks.picker.buffers() end, mode = 'n', noremap=true, silent=true, desc='List buffers'},
-        { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
+        -- { '<leader>bl', function() Snacks.picker.buffers() end, mode = 'n', noremap=true, silent=true, desc='List buffers'},
+        -- { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
         -- g for Git
         { '<leader>gt', function() Snacks.picker.git_status() end, desc = 'Git status' },
         { '<leader>gD', function() Snacks.picker.git_diff() end, desc = 'Git diff' },
+    },
+},
+
+{'wasabeef/bufferin.nvim',
+    cmd = {'Bufferin'},
+    config = function()
+        require('bufferin').setup()
+    end,
+    dependencies =
+    { 
+        'nvim-tree/nvim-web-devicons', -- For file icons
+        -- 'willothy/nvim-cokeline',     -- For buffer line integration
+        -- 'akinsho/bufferline.nvim',    -- Alternative buffer line
+    },
+    keys =
+    {
+        {'<leader>bl', '<cmd>Bufferin<cr>', mode='n', noremap=true, silent=true, desc='Manage buffers'},
     },
 },
 
