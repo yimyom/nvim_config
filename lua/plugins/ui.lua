@@ -114,13 +114,17 @@ return {
     dependencies =
     { 
         'nvim-tree/nvim-web-devicons', -- For file icons
-        -- 'willothy/nvim-cokeline',     -- For buffer line integration
-        -- 'akinsho/bufferline.nvim',    -- Alternative buffer line
     },
     keys =
     {
         {'<leader>bl', '<cmd>Bufferin<cr>', mode='n', noremap=true, silent=true, desc='Manage buffers'},
     },
+    icons =
+    {
+        modified = '●',
+        readonly = '🔒 ',
+        terminal = '',
+    }
 },
 
 {'nvim-lualine/lualine.nvim',
