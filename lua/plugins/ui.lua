@@ -108,9 +108,6 @@ return {
 
 {'wasabeef/bufferin.nvim',
     cmd = {'Bufferin'},
-    config = function()
-        require('bufferin').setup()
-    end,
     dependencies =
     { 
         'nvim-tree/nvim-web-devicons', -- For file icons
@@ -119,12 +116,27 @@ return {
     {
         {'<leader>bl', '<cmd>Bufferin<cr>', mode='n', noremap=true, silent=true, desc='Manage buffers'},
     },
-    icons =
-    {
-        modified = '●',
-        readonly = '🔒 ',
-        terminal = '',
-    }
+    config = function()
+        require('bufferin').setup({
+            display =
+            {
+                show_path = false,
+                show_hidden = true,
+                show_icons = true,
+            },
+            window =
+            {
+                border = 'rounded',
+            },
+            icons =
+            {
+                modified = '●',
+                readonly = '🔒 ',
+                terminal = '',
+            },
+            show_window_layout = true,
+        })
+    end,
 },
 
 {'nvim-lualine/lualine.nvim',
