@@ -2,7 +2,7 @@
 -- nvim_config is free software: you can redistribute it and/or modify it under the terms of the
 -- GNU General Public License as published by the Free Software Foundation, either version 3 of
 -- the License, or (at your option) any later version. nvim_config is distributed in the hope 
--- that it will be useful, but WITHOUT ANY WARRANTY; with-ignout even the implied warranty of
+-- that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 -- more details. You should have received a copy of the GNU General Public License along with
 -- nvim_config. If not, see <https://www.gnu.org/licenses/>.
@@ -58,24 +58,22 @@ local function make_codecompanion_cfg(engine)
         opts = { log_level = 'DEBUG', },
     }
 
-    -- DeepSeek's reasoner model counts the chain-of-thought against the
-    -- same max_tokens budget as the final answer. CodeCompanion's default
-    -- (8192) is too low for long reasoning: the whole budget gets eaten by
-    -- the chain-of-thought and "content" comes back empty
-    -- (finish_reason = "length"). Raise the ceiling so there's room left
-    -- for the actual answer. deepseek-reasoner supports up to 64000.
     if engine.adapter == 'deepseek' then
         cfg.adapters =
         {
-            deepseek = function()
-                return require('codecompanion.adapters').extend('deepseek',
-                {
-                    schema =
+            http =
+            {
+                deepseek = function()
+                    return require('codecompanion.adapters').extend('deepseek',
                     {
-                        max_tokens = { default = 32768, },
-                    },
-                })
-            end,
+                        schema =
+                        {
+                            max_tokens = { default = 32768, },
+                            reasoning_effort = { default = 'high', },
+                        },
+                    })
+                end,
+            },
         }
     end
 
