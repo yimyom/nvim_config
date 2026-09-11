@@ -48,7 +48,7 @@ local function check_for_existing_config()
 end
 
 local function make_codecompanion_cfg(engine)
-    return {
+    local cfg = {
         interactions = {
             chat = { adapter = engine.adapter, },
             inline = { adapter = engine.adapter, },
@@ -57,6 +57,29 @@ local function make_codecompanion_cfg(engine)
         },
         opts = { log_level = 'DEBUG', },
     }
+
+    -- DeepSeek's reasoner model counts the chain-of-thought against the
+    -- same max_tokens budget as the final answer. CodeCompanion's default
+    -- (8192) is too low for long reasoning: the whole budget gets eaten by
+    -- the chain-of-thought and "content" comes back empty
+    -- (finish_reason = "length"). Raise the ceiling so there's room left
+    -- for the actual answer. deepseek-reasoner supports up to 64000.
+    if engine.adapter == 'deepseek' then
+        cfg.adapters =
+        {
+            deepseek = function()
+                return require('codecompanion.adapters').extend('deepseek',
+                {
+                    schema =
+                    {
+                        max_tokens = { default = 32768, },
+                    },
+                })
+            end,
+        }
+    end
+
+    return cfg
 end
 
 -- Save the engine configuration into a small lua file
